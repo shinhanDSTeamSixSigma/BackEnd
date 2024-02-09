@@ -33,7 +33,7 @@ public class FarmEntity {
     private String farmConnect;
 
     @OneToOne
-    @JoinColumn(name = "tb_member_memberNo")
+    @JoinColumn(name = "tb_member_member_no")
     private MemberEntity memberEntity;
 
     private String farmCategory;

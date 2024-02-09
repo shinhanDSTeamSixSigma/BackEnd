@@ -36,14 +36,14 @@ public class CropEntity {
 	private Timestamp createdDate;
 	
 	@ManyToOne
-	@JoinColumn(name="tb_section_sectionNo")
+	@JoinColumn(name="tb_section_section_no")
 	private SectionEntity sectionEntity;
 	
 	@ManyToOne
-	@JoinColumn(name="tb_member_memberNo")
+	@JoinColumn(name="tb_member_member_no")
 	private MemberEntity memberEntity;
 	
 	@ManyToOne
-	@JoinColumn(name="tb_crop_dict_dictNo")
+	@JoinColumn(name="tb_crop_dict_dict_no")
 	private CropDictEntity cropDictEntity;
 }

@@ -23,6 +23,6 @@ public class SectionEntity {
 	private int sectionSize;
 	
 	@ManyToOne
-	@JoinColumn(name="tb_farm_farmNo")
+	@JoinColumn(name="tb_farm_farm_no")
 	private FarmEntity farmEntity;
 }

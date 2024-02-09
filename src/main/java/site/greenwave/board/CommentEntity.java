@@ -28,6 +28,6 @@ public class CommentEntity{
 	private int postNo;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_member_memberNo")
+	@JoinColumn(name = "tb_member_member_no")
 	private MemberEntity memberEntity;
 }

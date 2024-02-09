@@ -35,10 +35,10 @@ public class ReviewEntity{
 	private boolean isDeleted;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_member_memberNo")
+	@JoinColumn(name = "tb_member_member_no")
 	private MemberEntity memberEntity;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_farm_farmNo")
+	@JoinColumn(name = "tb_farm_farm_no")
 	private FarmEntity farmEntity;
 }

@@ -32,6 +32,6 @@ public class CropSenseorLogEntity {
 	@CreationTimestamp
 	private Timestamp sensorTime;
 	@ManyToOne
-	@JoinColumn(name="tb_crop_cropNo")
+	@JoinColumn(name="tb_crop_crop_no")
 	private CropEntity cropEntity;
 }

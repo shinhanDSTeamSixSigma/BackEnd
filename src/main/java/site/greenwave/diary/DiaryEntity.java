@@ -35,10 +35,10 @@ public class DiaryEntity{
 	private Timestamp registerDate;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_member_memberNo")
+	@JoinColumn(name = "tb_member_member_no")
 	private MemberEntity memberEntity;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_crop_cropNo")
+	@JoinColumn(name = "tb_crop_crop_no")
 	private CropEntity cropEntity;
 }

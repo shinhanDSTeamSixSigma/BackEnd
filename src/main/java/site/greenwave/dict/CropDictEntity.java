@@ -36,6 +36,6 @@ public class CropDictEntity{
 	private int highTemp;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_crop_category_cropCateNo")
+	@JoinColumn(name = "tb_crop_category_cropCate_no")
 	private CropCategoryEntity cropCategoryEntity;
 }
