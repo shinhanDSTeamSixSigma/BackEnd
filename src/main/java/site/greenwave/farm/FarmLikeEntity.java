@@ -18,13 +18,13 @@ import site.greenwave.member.MemberEntity;
 public class FarmLikeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int farmLikeNo;
+    private Integer farmLikeNo;
 
     @ManyToOne
-    @JoinColumn(name = "tb_farm_farm_no")
+    @JoinColumn(name = "farm_no")
     private FarmEntity farmEntity;
 
     @ManyToOne
-    @JoinColumn(name = "tb_member_member_no")
+    @JoinColumn(name = "member_no")
     private MemberEntity memberEntity;
 }

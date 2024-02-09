@@ -27,18 +27,18 @@ import site.greenwave.member.MemberEntity;
 public class ReviewEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int reviewNo;
+	private Integer reviewNo;
 	private String reviewContent;
-	private int rating;
+	private Integer rating;
 	@CreationTimestamp
 	private Timestamp createdDate;
 	private boolean isDeleted;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_member_member_no")
+	@JoinColumn(name = " member_no")
 	private MemberEntity memberEntity;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_farm_farm_no")
+	@JoinColumn(name = "farm_no")
 	private FarmEntity farmEntity;
 }

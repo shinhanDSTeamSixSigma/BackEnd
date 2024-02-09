@@ -22,12 +22,12 @@ import site.greenwave.member.MemberEntity;
 @Getter
 @ToString
 @Entity
-@Table(name="tbl_diary")
+@Table(name="tb_diary")
 @EqualsAndHashCode(of="diaryNo")
 public class DiaryEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int diaryNo;
+	private Integer diaryNo;
 	@CreationTimestamp
 	private Timestamp diaryDate;
 	private String content;
@@ -35,10 +35,10 @@ public class DiaryEntity{
 	private Timestamp registerDate;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_member_member_no")
+	@JoinColumn(name = "member_no")
 	private MemberEntity memberEntity;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_crop_crop_no")
+	@JoinColumn(name = "crop_no")
 	private CropEntity cropEntity;
 }

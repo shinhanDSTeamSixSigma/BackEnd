@@ -1,11 +1,6 @@
 package site.greenwave.member;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +14,7 @@ import site.greenwave.farm.FarmEntity;
 public class MemberEntity {
     @Id // pk 지정
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
-    private int memberNo;
+    private Integer memberNo;
     private String memberId;
     private String memberPwd;
     private String memberName;
@@ -27,13 +22,13 @@ public class MemberEntity {
     private String nickname;
     private String address1;
     private String address2;
-    private int memberPoint;
+    private Integer memberPoint;
     private String zipcode;
     
 /*    @Column
     private String member_role;*/
     
-    @OneToOne(mappedBy = "memberEntity")
+    @OneToOne(mappedBy = "memberEntity", cascade = CascadeType.ALL)
     private FarmEntity farmEntity;
 
 }

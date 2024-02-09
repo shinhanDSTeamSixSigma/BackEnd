@@ -21,21 +21,21 @@ import lombok.ToString;
 public class CropDictEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int cropDictNo;
-	private int spring;
-	private int summer;
-	private int fall;
-	private int winter;
+	private Integer cropDictNo;
+	private Integer spring;
+	private Integer summer;
+	private Integer fall;
+	private Integer winter;
 	private String summary;
-	private int term;
+	private Integer term;
 	private String cropContent;
 	private String tip;
 	private String effect;
 	private String nutrient;
-	private int lowTemp;
-	private int highTemp;
+	private Integer lowTemp;
+	private Integer highTemp;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_crop_category_cropCate_no")
+	@JoinColumn(name = "crop_cate_no")
 	private CropCategoryEntity cropCategoryEntity;
 }

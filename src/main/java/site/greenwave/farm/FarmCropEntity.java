@@ -22,12 +22,12 @@ import site.greenwave.member.MemberEntity;
 public class FarmCropEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int farmCropNo;
+    private Integer farmCropNo;
 
     @ManyToOne
-    @JoinColumn(name = "tb_member_member_no")
-    private MemberEntity memberEntity;
+    @JoinColumn(name = "farm_no")
+    private FarmEntity farmEntity;
     @OneToOne
-    @JoinColumn(name = "tb_crop_no")
+    @JoinColumn(name = "crop_dict_no")
     private CropDictEntity cropDictEntity;
 }

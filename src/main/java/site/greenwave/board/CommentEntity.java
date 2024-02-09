@@ -22,12 +22,12 @@ import site.greenwave.member.MemberEntity;
 public class CommentEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int commentNo;
+	private Integer commentNo;
 	private String commentContent;
-	private int commentCate;
-	private int postNo;
+	private Integer commentCate;
+	private Integer postNo;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_member_member_no")
+	@JoinColumn(name = "member_no")
 	private MemberEntity memberEntity;
 }

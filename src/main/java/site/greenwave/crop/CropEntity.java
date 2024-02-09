@@ -24,10 +24,10 @@ import site.greenwave.member.MemberEntity;
 public class CropEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cropNo;
+	private Integer cropNo;
 	private String cropNickname;
 	private String streamingAddr;	
-	private int cropState;
+	private Integer cropState;
 	@CreationTimestamp
 	private Timestamp buyDate;
 	@CreationTimestamp
@@ -36,14 +36,14 @@ public class CropEntity {
 	private Timestamp createdDate;
 	
 	@ManyToOne
-	@JoinColumn(name="tb_section_section_no")
+	@JoinColumn(name="section_no")
 	private SectionEntity sectionEntity;
 	
 	@ManyToOne
-	@JoinColumn(name="tb_member_member_no")
+	@JoinColumn(name="member_no")
 	private MemberEntity memberEntity;
 	
 	@ManyToOne
-	@JoinColumn(name="tb_crop_dict_dict_no")
+	@JoinColumn(name="dict_no")
 	private CropDictEntity cropDictEntity;
 }

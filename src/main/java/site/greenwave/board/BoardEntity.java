@@ -34,15 +34,15 @@ public class BoardEntity{
 	private String boardContent;
 	@CreationTimestamp
 	private Timestamp createdDate;
-	private int views;
+	private Integer views;
 	private boolean isReplied;
 	private boolean isDeleted;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_member_member_no")
+	@JoinColumn(name = "member_no")
 	private MemberEntity memberEntity;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_farm_farm_no")
+	@JoinColumn(name = " farm_no")
 	private FarmEntity farmEntity;
 }

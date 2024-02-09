@@ -23,15 +23,15 @@ import lombok.Setter;
 public class CropSenseorLogEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int logNo;
-	private int thomer;
-	private int humidity;
-	private int lumen;
-	private int soilHumid;
+	private Integer logNo;
+	private Integer thomer;
+	private Integer humidity;
+	private Integer lumen;
+	private Integer soilHumid;
 	
 	@CreationTimestamp
 	private Timestamp sensorTime;
 	@ManyToOne
-	@JoinColumn(name="tb_crop_crop_no")
+	@JoinColumn(name="crop_no")
 	private CropEntity cropEntity;
 }
