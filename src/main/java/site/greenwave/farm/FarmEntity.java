@@ -20,7 +20,7 @@ import site.greenwave.member.MemberEntity;
 public class FarmEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int farmNo;
+    private Integer farmNo;
     // 농장 이름
     private String farmName;
     private String farmAddress;
@@ -29,13 +29,13 @@ public class FarmEntity {
     private String farmPhone;
     private String farmSize;
     private String farmCareer;
-    private int farmOrderNum;
+    private Integer farmOrderNum;
     private String farmConnect;
 
     @OneToOne
-    @JoinColumn(name = "tb_member_memberNo")
+    @JoinColumn(name = "member_no")
     private MemberEntity memberEntity;
 
     private String farmCategory;
-    private double farmRating;
+    private Double farmRating;
 }

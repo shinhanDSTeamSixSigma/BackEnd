@@ -20,6 +20,6 @@ import site.greenwave.board.ReviewEntity;
 public class CropCategoryEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int cropCateNo;
+	private Integer cropCateNo;
 	private String cropCateName;
 }

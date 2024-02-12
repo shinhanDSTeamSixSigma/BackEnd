@@ -24,13 +24,13 @@ import lombok.Setter;
 public class CropManureLogEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int manureLogNo;
-	private int manureDiv;
+	private Integer manureLogNo;
+	private Integer manureDiv;
 	private String manureLog;
 	@CreationTimestamp
 	private Timestamp createdDate;
 	
 	@ManyToOne
-	@JoinColumn(name="tb_crop_cropNo")
+	@JoinColumn(name="crop_no")
 	private CropEntity cropEntity;
 }

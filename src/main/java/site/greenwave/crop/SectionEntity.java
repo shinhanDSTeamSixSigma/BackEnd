@@ -19,10 +19,10 @@ import site.greenwave.farm.FarmEntity;
 public class SectionEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int sectionNo;
-	private int sectionSize;
+	private Integer sectionNo;
+	private Integer sectionSize;
 	
 	@ManyToOne
-	@JoinColumn(name="tb_farm_farmNo")
+	@JoinColumn(name="farm_no")
 	private FarmEntity farmEntity;
 }

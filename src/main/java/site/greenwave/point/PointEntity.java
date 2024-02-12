@@ -23,28 +23,28 @@ import site.greenwave.member.MemberEntity;
 @Getter
 @ToString
 @Entity
-@Table(name="tbl_point")
+@Table(name="tb_point")
 @EqualsAndHashCode(of="pointNo")
 public class PointEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int pointNo;
-	private int pointValue;
+	private Integer pointNo;
+	private Integer pointValue;
 	@CreationTimestamp
 	private Timestamp pointDate;
-	private int changeValue;
-	private int changeCause;
+	private Integer changeValue;
+	private Integer changeCause;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_member_memberNo")
+	@JoinColumn(name = "member_no")
 	private MemberEntity memberEntity;
 	
 	@ManyToOne
-	@JoinColumn(name = "tb_crop_cropNo")
+	@JoinColumn(name = "crop_no")
 	private CropEntity cropEntity;
 	
 	@OneToOne
 	// 아래의 name으로 테이블의 fk를 관리한다!
-	@JoinColumn(name = "tb_bill_billNo")
+	@JoinColumn(name = "bill_no")
 	private BillEntity billEntity;
 }
