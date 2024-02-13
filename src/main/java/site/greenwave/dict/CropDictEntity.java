@@ -22,6 +22,7 @@ public class CropDictEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer cropDictNo;
+	private String cropName;
 	private Integer spring;
 	private Integer summer;
 	private Integer fall;
@@ -38,4 +39,5 @@ public class CropDictEntity{
 	@ManyToOne
 	@JoinColumn(name = "crop_cate_no")
 	private CropCategoryEntity cropCategoryEntity;
+	
 }
