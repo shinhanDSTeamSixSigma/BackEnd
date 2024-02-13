@@ -7,14 +7,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import site.greenwave.member.MemberEntity;
 
 @Entity
 @Setter
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(exclude = "memberEntity")
 @Table(name = "tb_farm")
 @EqualsAndHashCode(of = "farmNo")
 public class FarmEntity {
