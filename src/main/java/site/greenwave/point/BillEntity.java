@@ -21,7 +21,7 @@ public class BillEntity{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long billNo;
 	private Integer finalValue;
-	private Integer oneValue;
+	private Integer originValue;
 	private Integer discountValue;
 	@CreationTimestamp
 	private Timestamp billDate;
@@ -38,7 +38,6 @@ public class BillEntity{
 	private PointEntity pointEntity;
 	
 	// 한쪽에서만 식별할거면 단방향이여도됨
-	// 회원은 카드를 알아야되는데 카드는 회우너을 몰라도 되니까 그럴떈 단방향인거임
-
-
+	// 회원은 카드를 알아야되는데 카드는 회원을 몰라도 되니까 그럴떈 단방향인거임
 }
+
