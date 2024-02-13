@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Table(name="tb_crop_sensor_log")
 @EqualsAndHashCode(of="logNo")
-public class CropSenseorLogEntity {
+public class CropSensorLogEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer logNo;
