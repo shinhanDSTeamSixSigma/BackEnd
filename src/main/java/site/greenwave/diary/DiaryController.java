@@ -26,32 +26,8 @@ public class DiaryController {
 		
 		//게시글 삭제
 		diaryRepo.deleteById(diaryId);
-		
-//	    // 게시글에 연결된 파일 조회
-//	    Optional<FileEntity> optionalFile = fileRepo.findByFileManageNo(diaryId);
-//	    
-//	    optionalFile.ifPresent(file -> {
-//	        // 파일 삭제
-//	        fileRepo.delete(file);
-//
-//	        // 파일 시스템에서 실제 파일 삭제 작업 수행
-//	        deleteFile(file.getPath());
-//	    });
-
 		Map<String, Object> result = new HashMap<>();
 		result.put("result", "success");
 		return result;
 	}
-
-//	private static boolean deleteFile(String filePath) {
-//	    try {
-//	        Path path = Paths.get(filePath);
-//	        Files.deleteIfExists(path);
-//	        return true;
-//	    } catch (IOException e) {
-//	        e.printStackTrace();
-//	        return false;
-//	    }
-//	}
-
 }

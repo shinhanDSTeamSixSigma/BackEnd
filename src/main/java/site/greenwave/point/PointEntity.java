@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,12 +41,12 @@ public class PointEntity{
 	@JoinColumn(name = "member_no")
 	private MemberEntity memberEntity;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "crop_no")
 	private CropEntity cropEntity;
 	
-	@OneToOne
 	// 아래의 name으로 테이블의 fk를 관리한다!
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "bill_no")
 	private BillEntity billEntity;
 }
