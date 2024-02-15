@@ -17,11 +17,10 @@ public class PointRepositoryImpl extends QuerydslRepositorySupport {
 		super(PointEntity.class);
 	}
 	
-	public List<Object[]> findPointsByMemberNoAndChangeValueAndPointDate(Integer memberNo, Integer cropNo, Integer changeValue, Integer year, Integer month) {
+	public List<Object[]> findPointsByMemberNoAndChangeValueAndPointDate(Integer memberNo, Integer changeValue, Integer year, Integer month) {
 		
 		QPointEntity point = QPointEntity.pointEntity;
         QMemberEntity member = QMemberEntity.memberEntity;
-        QCropEntity crop = QCropEntity.cropEntity;
         
         JPQLQuery<PointEntity> query = from(point);
         JPQLQuery<Tuple> tuple = query.select(point.pointNo, point.pointValue, point.pointDate, point.changeValue, point.changeCause);
@@ -30,7 +29,6 @@ public class PointRepositoryImpl extends QuerydslRepositorySupport {
         	  .on(point.memberEntity.memberNo.eq(member.memberNo))
 	          .where(
 	                member.memberNo.eq(memberNo),
-	                crop.cropNo.eq(cropNo),
 	                
 	                Expressions.booleanTemplate("YEAR({0}) = {1}", point.pointDate, year),
 	                Expressions.booleanTemplate("MONTH({0}) = {1}", point.pointDate, month)

@@ -46,16 +46,35 @@ public class PointRepositoryTest {
 		
 		//그냥 찾기
 		List<PointEntity> entity = pointRepo.findAll();
-//		//member_no에 따른 전체 리스트
-//		List<PointEntity> entity2 = pointRepo.findAllByMemberEntityMemberNo(member_no);
-//		//member_no, change_value에 따른 리스트
-//		List<PointEntity> entity3 = pointRepo.findAllByMemberEntityMemberNoAndChangeValue(member_no, changeValue);
+		//member_no에 따른 전체 리스트
+		List<PointEntity> entity2 = pointRepo.findAllByMemberEntityMemberNo(member_no);
+		//member_no, change_value에 따른 리스트
+		List<PointEntity> entity3 = pointRepo.findAllByMemberEntityMemberNoAndChangeValue(member_no, changeValue);
 		//member_no, change_value, point_date에 따른 리스트
-//		List<PointEntity> entity4 = pointRepo.findAllByMemberEntityMemberNoAndChangeValueAndPointDateBetween(member_no, changeValue, startTimestamp, endTimestamp);
+		List<PointEntity> entity4 = pointRepo.findAllByMemberEntityMemberNoAndChangeValueAndPointDateBetween(member_no, changeValue, startTimestamp, endTimestamp);
 		
 		entity.forEach(x -> log.info("entity: "+String.valueOf(x.getPointNo())));
-//	    entity2.forEach(x -> log.info("entity2: "+String.valueOf(x.getPointNo())));
-//	    entity3.forEach(x -> log.info("entity3: "+String.valueOf(x.getPointNo())));
-//	    entity4.forEach(x -> log.info("entity4: "+String.valueOf(x.getPointNo())));
+	    entity2.forEach(x -> log.info("entity2: "+String.valueOf(x.getPointNo())));
+	    entity3.forEach(x -> log.info("entity3: "+String.valueOf(x.getPointNo())));
+	    entity4.forEach(x -> log.info("entity4: "+String.valueOf(x.getPointNo())));
+	}
+	
+	@Test
+	void chargePoint() {
+		Integer memberNo = 1;
+		Integer year = 2024;
+		Integer month = 02;
+		
+		//현재 보유 포인트
+		Integer result3 = pointRepo.subtractPointValuesByChangeValues(memberNo);
+		log.info(String.valueOf("result3: "+result3));
+		
+		//총 충전 포인트
+		Integer result = pointRepo.sumPointValueByConditions(memberNo);
+		log.info(String.valueOf("result: "+result));
+		
+		//이번달 충전 포인트
+		Integer result2 = pointRepo.sumPointValueByConditionsAndPointDate(memberNo,year,month);
+		log.info(String.valueOf("result2: "+result2));
 	}
 }
