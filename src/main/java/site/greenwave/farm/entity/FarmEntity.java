@@ -1,4 +1,4 @@
-package site.greenwave.farm;
+package site.greenwave.farm.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +11,6 @@ import lombok.*;
 import site.greenwave.member.MemberEntity;
 
 @Entity
-@Setter
 @Getter
 @Builder
 @AllArgsConstructor
@@ -33,11 +32,12 @@ public class FarmEntity {
     private String farmCareer;
     private Integer farmOrderNum;
     private String farmConnect;
-
+    private String farmCategory;
+    private Double farmRating;
+    private Integer reviewCnt;
     @OneToOne
     @JoinColumn(name = "member_no")
     private MemberEntity memberEntity;
 
-    private String farmCategory;
-    private Double farmRating;
+
 }

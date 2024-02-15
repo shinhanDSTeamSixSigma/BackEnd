@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import site.greenwave.farm.FarmEntity;
+import site.greenwave.farm.entity.FarmEntity;
 
 @Entity
 @Setter
@@ -28,7 +28,7 @@ public class MemberEntity {
 /*    @Column
     private String member_role;*/
     
-    @OneToOne(mappedBy = "memberEntity", cascade = CascadeType.ALL)
-    private FarmEntity farmEntity;
+//    @OneToOne(mappedBy = "memberEntity", cascade = CascadeType.ALL)
+//    private FarmEntity farmEntity;
 
 }

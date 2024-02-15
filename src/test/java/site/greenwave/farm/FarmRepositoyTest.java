@@ -1,7 +1,5 @@
 package site.greenwave.farm;
 
-import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -11,11 +9,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import site.greenwave.farm.entity.FarmEntity;
+import site.greenwave.farm.repository.FarmRepositoy;
 
 import java.util.List;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Slf4j
@@ -28,7 +26,7 @@ public class FarmRepositoyTest {
     public void test1() throws Exception{
         //given
         log.info("---------");
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 10; i++) {
             FarmEntity farmEntity = FarmEntity.builder()
                     .farmName("토심이네 " + i)
                     .farmAddress("경기도 수원시 장안구 장안로 " + i +"길")
@@ -41,6 +39,7 @@ public class FarmRepositoyTest {
                     .farmConnect("10시 ~ 20시")
                     .farmCategory("미나리과")
                     .farmRating(4.0 + 0.1* (double) i)
+                    .reviewCnt(100)
                     .build();
             farmRepositoy.save(farmEntity);
 
@@ -54,7 +53,7 @@ public class FarmRepositoyTest {
         Optional<FarmEntity> result = farmRepositoy.findById(farm_no);
         List<FarmEntity> result2 = farmRepositoy.findAll();
 //        result.stream().forEach((x)->log.info(x.getFarmCategory()));
-        result2.stream().forEach((x)->log.info(x.getFarmName()));
+        result2.stream().forEach((x)->log.info(x.toString()));
 
 
 //        log.info(farmEntity.getFarmName());
@@ -64,10 +63,10 @@ public class FarmRepositoyTest {
     @Test
     public void testModify() throws Exception{
         //given
-        Integer farm_no = 22;
+        Integer farm_no = 10;
         Optional<FarmEntity> result = farmRepositoy.findById(farm_no);
         FarmEntity farmEntity = result.orElseThrow();
-        farmEntity.setFarmCategory("오이과");
+//        farmEntity.setFarmCategory("오이과");
         farmRepositoy.save(farmEntity);
 
 
@@ -83,7 +82,7 @@ public class FarmRepositoyTest {
     @Test
     public void testPaging() throws Exception{
         //given
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("farmNo").descending());
+        Pageable pageable = PageRequest.of(0, 5, Sort.by("farmNo").descending());
         Page<FarmEntity> result = farmRepositoy.findAll(pageable);
         log.info("Total elements: {}", result.getTotalElements());
         result.getContent().stream().forEach(a -> log.info(a.toString()));

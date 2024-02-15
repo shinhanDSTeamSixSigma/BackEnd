@@ -1,4 +1,4 @@
-package site.greenwave.farm;
+package site.greenwave.farm.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +9,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import site.greenwave.farm.entity.FarmEntity;
 import site.greenwave.member.MemberEntity;
 
 @Entity

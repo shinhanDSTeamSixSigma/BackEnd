@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import site.greenwave.dict.CropDictEntity;
-import site.greenwave.member.MemberEntity;
+import site.greenwave.farm.entity.FarmEntity;
 
 @Entity
 @Setter
