@@ -77,4 +77,19 @@ public class PointRepositoryTest {
 		Integer result2 = pointRepo.sumPointValueByConditionsAndPointDate(memberNo,year,month);
 		log.info(String.valueOf("result2: "+result2));
 	}
+	
+	@Test
+	void receiptPoint() {
+		Integer memberNo = 1;
+		Integer cropNo = 1;
+		Integer changeCause = 1;
+		
+		//해당 작물에 소비한 총 금액
+		Integer result = pointRepo.sumByMemberAndCropAndChange(memberNo, cropNo);
+		log.info(String.valueOf("result: "+result));
+		
+		//해당 작물에 소비한 갯수, 금액
+		Object[] result2 = pointRepo.countAndSumByMemberAndCropAndChange(memberNo,cropNo,changeCause);
+		log.info(String.valueOf("result2: "+result2.toString()));
+	}
 }

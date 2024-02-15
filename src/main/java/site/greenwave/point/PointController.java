@@ -17,6 +17,9 @@ public class PointController {
 	@Autowired
 	private PointRepository pointRepo;
 	
+	/*------------
+	 * 	포인트 내역
+	 ------------*/
 	//현재 보유 포인트
 	@GetMapping("/current-point")
 	public Integer subtractPointValuesByChangeValues(
@@ -25,8 +28,7 @@ public class PointController {
 		Integer result = pointRepo.subtractPointValuesByChangeValues(memberNo);
 		
 		return result;
-	}
-	
+	}	
 	//총 충전 포인트
 	@GetMapping("/total-charge")
 	public Integer sumPointValueByConditions(
@@ -36,7 +38,6 @@ public class PointController {
 		
 		return result;
 	}
-	
 	//이번달 충전 포인트
 	@GetMapping("/month-charge")
 	public Integer sumPointValueByConditionsAndPointDate(
@@ -48,7 +49,6 @@ public class PointController {
 		
 		return result;
 	}
-	
 	//포인트 내역
 	@GetMapping("/point-detail")
 	public List<Object[]> getPointList(
@@ -60,5 +60,30 @@ public class PointController {
 		List<Object[]> entity = pointRepo.findPointsByMemberNoAndChangeValueAndPointDate(
                 memberNo, changeValue, year, month);
 	    return entity;
+	}
+	
+	/*---------
+	 * 	영수증
+	 ---------*/
+	//해당 작물에 소비한 총 금액
+	@GetMapping("/crop-total-charge")
+	public Integer sumByMemberAndCropAndChange(
+			@RequestParam("memberNo") Integer memberNo,
+			@RequestParam("cropNo") Integer cropNo) {
+	
+		Integer result = pointRepo.sumByMemberAndCropAndChange(memberNo, cropNo);
+		
+		return result;
+	}
+	//해당 작물에 소비한 갯수, 금액
+	@GetMapping("/crop-each-charge")
+	public Object[] countAndSumByMemberAndCropAndChange(
+			@RequestParam("memberNo") Integer memberNo,
+			@RequestParam("cropNo") Integer cropNo,
+			@RequestParam("changeCause") Integer changeCause) {
+	
+		Object[] entity = pointRepo.countAndSumByMemberAndCropAndChange(memberNo, cropNo, changeCause);
+		
+		return entity;
 	}
 }
