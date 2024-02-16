@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import site.greenwave.crop.CropEntity;
+import site.greenwave.crop.CropRepository;
 import site.greenwave.point.repository.PointRepository;
 
 @CrossOrigin(origins = {"http://localhost:3000/","http://localhost/"})
@@ -21,6 +23,8 @@ public class PointController {
 	
 	@Autowired
 	private PointRepository pointRepo;
+	@Autowired
+	private CropRepository cropRepo;
 	
 	/*------------
 	 * 	포인트 내역
@@ -97,6 +101,17 @@ public class PointController {
 			@RequestParam("cropNo") Integer cropNo) {
 	
 		Integer result = pointRepo.getPointValueForCropCharge(memberNo, cropNo);
+		
+		return result;
+	}
+	
+	//작물 상태
+	@GetMapping("/crop-status")
+	public Integer getCropState(
+			@RequestParam("memberNo") Integer memberNo,
+			@RequestParam("cropNo") Integer cropNo) {
+	
+		Integer result = cropRepo.getCropState(memberNo, cropNo);
 		
 		return result;
 	}

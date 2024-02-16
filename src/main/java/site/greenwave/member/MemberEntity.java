@@ -28,7 +28,7 @@ public class MemberEntity {
 /*    @Column
     private String member_role;*/
     
-    @OneToOne(mappedBy = "memberEntity", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
-    private FarmEntity farmEntity;
+//    @OneToOne(mappedBy = "memberEntity", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+//    private FarmEntity farmEntity;
 
 }

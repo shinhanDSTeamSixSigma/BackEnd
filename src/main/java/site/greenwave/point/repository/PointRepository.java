@@ -9,10 +9,6 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import site.greenwave.point.entity.PointEntity;
 
 public interface PointRepository extends JpaRepository<PointEntity, Long>, QuerydslPredicateExecutor<PointEntity>{
-//	//멤버 넘버에 따른 전체 리스트
-//	List<PointEntity> findAllByMemberEntityMemberNo(Integer memberNo);
-//	//멤버 넘버, 증감 구분에 따른 전체 리스트
-//	List<PointEntity> findAllByMemberEntityMemberNoAndChangeValue(Integer memberNo, Integer changeValue);
 	
 	//포인트 내역: 현재 보유 포인트
 	@Query("SELECT " +
@@ -65,7 +61,7 @@ public interface PointRepository extends JpaRepository<PointEntity, Long>, Query
 	           "AND pe.changeCause = 4")
 	Object[] getFertilizerReceiptInfo(Integer memberNo, Integer cropNo);
 	
-	//작물 영수증: 해당 작물로 수령받은 포인트
+	//작물 영수증: 해당 작물로 수령받은 포인트 - cropState 4일때 걸어야할지,,?
 	@Query("SELECT pe.pointValue FROM PointEntity pe " +
 	           "WHERE pe.memberEntity.memberNo = :memberNo " +
 	           "AND pe.cropEntity.cropNo = :cropNo " +
