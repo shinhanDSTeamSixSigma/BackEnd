@@ -64,4 +64,12 @@ public interface PointRepository extends JpaRepository<PointEntity, Long>, Query
 	           "AND pe.changeValue = 1 " +
 	           "AND pe.changeCause = 4")
 	Object[] getFertilizerReceiptInfo(Integer memberNo, Integer cropNo);
+	
+	//작물 영수증: 해당 작물로 수령받은 포인트
+	@Query("SELECT pe.pointValue FROM PointEntity pe " +
+	           "WHERE pe.memberEntity.memberNo = :memberNo " +
+	           "AND pe.cropEntity.cropNo = :cropNo " +
+	           "AND pe.changeValue = 0 " +
+	           "AND pe.changeCause = 2")
+	Integer getPointValueForCropCharge(Integer memberNo, Integer cropNo);
 }

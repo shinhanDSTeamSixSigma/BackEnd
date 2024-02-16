@@ -3,6 +3,7 @@ package site.greenwave.point.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,7 +27,7 @@ public class PointController {
 	 ------------*/
 	//현재 보유 포인트
 	@GetMapping("/current-point")
-	public Integer subtractPointValuesByChangeValues(
+	public Integer getCurrentPoint(
 			@RequestParam("memberNo") Integer memberNo) {
 	
 		Integer result = pointRepo.getCurrentPoint(memberNo);
@@ -35,7 +36,7 @@ public class PointController {
 	}	
 	//총 충전 포인트
 	@GetMapping("/total-charge")
-	public Integer sumPointValueByConditions(
+	public Integer getTotalChargePoints(
 			@RequestParam("memberNo") Integer memberNo) {
 	
 		Integer result = pointRepo.getTotalChargePoints(memberNo);
@@ -44,7 +45,7 @@ public class PointController {
 	}
 	//이번달 충전 포인트
 	@GetMapping("/month-charge")
-	public Integer sumPointValueByConditionsAndPointDate(
+	public Integer getMonthlyChargePoints(
 			@RequestParam("memberNo") Integer memberNo,
 			@RequestParam("year") Integer year,
             @RequestParam("month") Integer month) {
@@ -69,30 +70,34 @@ public class PointController {
 	/*---------
 	 * 	영수증
 	 ---------*/
-	//해당 작물에 소비한 총 금액
-	@GetMapping("/crop-total-charge")
-	public Integer sumByMemberAndCropAndChange(
+	@GetMapping("/crop-charge")
+	public Object[] getCropCharge(
 			@RequestParam("memberNo") Integer memberNo,
 			@RequestParam("cropNo") Integer cropNo) {
 	
-		Integer result = pointRepo.getTotalAmountSpentOnCrop(memberNo, cropNo);
+		//해당 작물에 소비한 총 금액
+		Integer totalAmountSpent = pointRepo.getTotalAmountSpentOnCrop(memberNo, cropNo);
 		
-		return result;
-	}
-	//해당 작물에 소비한 갯수, 금액
-	@GetMapping("/crop-each-charge")
-	public Object[] countAndSumByMemberAndCropAndChange(
-			@RequestParam("memberNo") Integer memberNo,
-			@RequestParam("cropNo") Integer cropNo) {
-	
+		//해당 작물에 소비한 갯수, 금액(땅, 비료)
 		Object[] landReceiptInfo = pointRepo.getLandReceiptInfo(memberNo, cropNo);
 		Object[] fertilizerReceiptInfo = pointRepo.getFertilizerReceiptInfo(memberNo, cropNo);
 		
 	    // 여러 정보를 필요에 따라 하나의 배열로 결합
 	    List<Object> combinedResult = new ArrayList<>();
+	    combinedResult.add(totalAmountSpent);
 	    combinedResult.addAll(Arrays.asList(landReceiptInfo));
 	    combinedResult.addAll(Arrays.asList(fertilizerReceiptInfo));
 		
 		return combinedResult.toArray();
+	}
+	//해당 작물로 수령받은 포인트
+	@GetMapping("/crop-point")
+	public Integer getPointValueForCropCharge(
+			@RequestParam("memberNo") Integer memberNo,
+			@RequestParam("cropNo") Integer cropNo) {
+	
+		Integer result = pointRepo.getPointValueForCropCharge(memberNo, cropNo);
+		
+		return result;
 	}
 }
