@@ -1,4 +1,4 @@
-package site.greenwave.point;
+package site.greenwave.point.repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,9 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPQLQuery;
 
-import site.greenwave.crop.QCropEntity;
 import site.greenwave.member.QMemberEntity;
+import site.greenwave.point.QPointEntity;
+import site.greenwave.point.entity.PointEntity;
 
 public class PointRepositoryImpl extends QuerydslRepositorySupport {
 	public PointRepositoryImpl() {

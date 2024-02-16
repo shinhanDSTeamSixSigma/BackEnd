@@ -1,4 +1,4 @@
-package site.greenwave.point;
+package site.greenwave.point.entity;
 
 import java.sql.Timestamp;
 
@@ -13,7 +13,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import site.greenwave.diary.DiaryEntity;
+import site.greenwave.diary.entity.DiaryEntity;
 import site.greenwave.farm.FarmEntity;
 import site.greenwave.member.MemberEntity;
 

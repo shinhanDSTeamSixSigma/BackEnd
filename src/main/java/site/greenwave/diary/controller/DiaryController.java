@@ -1,4 +1,4 @@
-package site.greenwave.diary;
+package site.greenwave.diary.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.transaction.Transactional;
+import site.greenwave.diary.repository.DiaryRepository;
 
 @CrossOrigin(origins = {"http://localhost:3000/","http://localhost/"})
 @RestController

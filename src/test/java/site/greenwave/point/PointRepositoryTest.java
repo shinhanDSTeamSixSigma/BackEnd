@@ -12,6 +12,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
+import site.greenwave.point.entity.PointEntity;
+import site.greenwave.point.repository.PointRepository;
 
 @SpringBootTest
 @Slf4j

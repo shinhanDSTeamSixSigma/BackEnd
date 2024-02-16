@@ -1,4 +1,4 @@
-package site.greenwave.point;
+package site.greenwave.point.controller;
 
 import java.io.IOException;
 

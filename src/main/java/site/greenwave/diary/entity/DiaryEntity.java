@@ -1,4 +1,4 @@
-package site.greenwave.diary;
+package site.greenwave.diary.entity;
 
 import java.sql.Timestamp;
 

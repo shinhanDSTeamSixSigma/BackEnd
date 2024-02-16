@@ -1,10 +1,12 @@
-package site.greenwave.point;
+package site.greenwave.point.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+
+import site.greenwave.point.entity.PointEntity;
 
 public interface PointRepository extends JpaRepository<PointEntity, Long>, QuerydslPredicateExecutor<PointEntity>{
 //	//멤버 넘버에 따른 전체 리스트

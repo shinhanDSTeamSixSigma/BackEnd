@@ -1,4 +1,4 @@
-package site.greenwave.point;
+package site.greenwave.point.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import site.greenwave.point.repository.PointRepository;
+
 @CrossOrigin(origins = {"http://localhost:3000/","http://localhost/"})
 @RestController
 @RequestMapping("/pay")
 public class PointController {
+	
 	@Autowired
 	private PointRepository pointRepo;
 	
