@@ -66,15 +66,15 @@ public class PointRepositoryTest {
 		Integer month = 02;
 		
 		//현재 보유 포인트
-		Integer result3 = pointRepo.subtractPointValuesByChangeValues(memberNo);
+		Integer result3 = pointRepo.getCurrentPoint(memberNo);
 		log.info(String.valueOf("result3: "+result3));
 		
 		//총 충전 포인트
-		Integer result = pointRepo.sumPointValueByConditions(memberNo);
+		Integer result = pointRepo.getTotalChargePoints(memberNo);
 		log.info(String.valueOf("result: "+result));
 		
 		//이번달 충전 포인트
-		Integer result2 = pointRepo.sumPointValueByConditionsAndPointDate(memberNo,year,month);
+		Integer result2 = pointRepo.getMonthlyChargePoints(memberNo,year,month);
 		log.info(String.valueOf("result2: "+result2));
 	}
 	
@@ -85,11 +85,11 @@ public class PointRepositoryTest {
 		Integer changeCause = 1;
 		
 		//해당 작물에 소비한 총 금액
-		Integer result = pointRepo.sumByMemberAndCropAndChange(memberNo, cropNo);
+		Integer result = pointRepo.getTotalAmountSpentOnCrop(memberNo, cropNo);
 		log.info(String.valueOf("result: "+result));
 		
 		//해당 작물에 소비한 갯수, 금액
-		Object[] result2 = pointRepo.countAndSumByMemberAndCropAndChange(memberNo,cropNo,changeCause);
+		Object[] result2 = pointRepo.getLandReceiptInfo(memberNo,cropNo);
 		log.info(String.valueOf("result2: "+result2.toString()));
 	}
 }

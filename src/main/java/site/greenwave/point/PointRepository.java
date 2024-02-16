@@ -19,14 +19,14 @@ public interface PointRepository extends JpaRepository<PointEntity, Long>, Query
 	           "- " +
 	           "(SELECT SUM(pe.pointValue) FROM PointEntity pe " +
 	           " WHERE pe.memberEntity.memberNo = :memberNo AND pe.changeValue = 1)")
-	Integer subtractPointValuesByChangeValues(Integer memberNo);
+	Integer getCurrentPoint(Integer memberNo);
 	
 	//포인트 내역: 총 충전 포인트
 	@Query("SELECT SUM(pe.pointValue) FROM PointEntity pe " +
 	       "WHERE pe.memberEntity.memberNo = :memberNo " +
 	           "AND pe.changeValue = 0 " +
 	           "AND pe.changeCause = 0")
-	Integer sumPointValueByConditions(Integer memberNo);
+	Integer getTotalChargePoints(Integer memberNo);
 	
 	//포인트 내역: 이번달 충전 포인트
 	@Query("SELECT SUM(pe.pointValue) FROM PointEntity pe " +
@@ -35,7 +35,7 @@ public interface PointRepository extends JpaRepository<PointEntity, Long>, Query
 		           "AND pe.changeCause = 0 " +
 		           "AND YEAR(pe.pointDate) = :year " +
 		           "AND MONTH(pe.pointDate) = :month")
-	Integer sumPointValueByConditionsAndPointDate(Integer memberNo, Integer year, Integer month);
+	Integer getMonthlyChargePoints(Integer memberNo, Integer year, Integer month);
 	
 	//멤버 넘버, 증감 구분, 작물번호, 날짜에 따른 전체 리스트
 	List<Object[]> findPointsByMemberNoAndChangeValueAndPointDate(Integer memberNo, Integer changeValue, Integer year, Integer month);
@@ -45,13 +45,21 @@ public interface PointRepository extends JpaRepository<PointEntity, Long>, Query
 	           "WHERE pe.memberEntity.memberNo = :memberNo " +
 	           "AND pe.cropEntity.cropNo = :cropNo " +
 	           "AND pe.changeValue = 1")
-	Integer sumByMemberAndCropAndChange(Integer memberNo, Integer cropNo);
+	Integer getTotalAmountSpentOnCrop(Integer memberNo, Integer cropNo);
 	
-	//작물 영수증: 해당 작물에 소비한 갯수, 금액
+	//작물 영수증: 해당 작물에 소비한 갯수, 금액 - 땅
 	@Query("SELECT COUNT(pe.pointNo), SUM(pe.pointValue) FROM PointEntity pe " +
 	           "WHERE pe.memberEntity.memberNo = :memberNo " +
 	           "AND pe.cropEntity.cropNo = :cropNo " +
 	           "AND pe.changeValue = 1 " +
-	           "AND pe.changeCause = :changeCause")
-	Object[] countAndSumByMemberAndCropAndChange(Integer memberNo, Integer cropNo, Integer changeCause);
+	           "AND pe.changeCause = 3")
+	Object[] getLandReceiptInfo(Integer memberNo, Integer cropNo);
+	
+	//작물 영수증: 해당 작물에 소비한 갯수, 금액 - 영양제
+	@Query("SELECT COUNT(pe.pointNo), SUM(pe.pointValue) FROM PointEntity pe " +
+	           "WHERE pe.memberEntity.memberNo = :memberNo " +
+	           "AND pe.cropEntity.cropNo = :cropNo " +
+	           "AND pe.changeValue = 1 " +
+	           "AND pe.changeCause = 4")
+	Object[] getFertilizerReceiptInfo(Integer memberNo, Integer cropNo);
 }
