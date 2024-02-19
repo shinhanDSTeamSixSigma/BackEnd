@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import site.greenwave.diary.dto.DiaryDto;
 import site.greenwave.diary.entity.DiaryEntity;
 import site.greenwave.diary.service.DiaryService;
 import site.greenwave.file.FileUtil;
@@ -41,23 +42,25 @@ public class DiaryController {
 	
 	//일기 등록
     @PostMapping("/register")
-    public ResponseEntity<Map<String, Object>> register(@RequestBody Map<String, Object> map) {
-		Map<String, Object> result = diaryService.registerDiary(map);
+    public ResponseEntity<Map<String, Object>> register(@RequestBody DiaryDto diaryDto) {
+		Map<String, Object> result = diaryService.registerDiary(diaryDto);
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("Result", result.get("diaryNo")));
     }
     
     //일기 수정
-    @PutMapping("/{diaryNo}")
+    @PutMapping("/modify/{diaryNo}")
     public ResponseEntity<Map<String, Object>> modify(
-    		@RequestBody Map<String, Object> map,
+    		@RequestBody DiaryDto diaryDto,
     		@PathVariable Integer diaryNo) {
-        diaryService.modifyDiary(map, diaryNo);
+    	
+    	diaryDto.setDiaryNo(diaryNo);
+        diaryService.modifyDiary(diaryDto);
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("Result", "Success"));
     }
     
     //일기 삭제
-    @PostMapping("/delete")
-    public ResponseEntity<Map<String, Object>> delete(@RequestBody Integer diaryNo) {
+    @PostMapping("/delete/{diaryNo}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Integer diaryNo) {
         diaryService.deleteDiary(diaryNo);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(Map.of("Result", "Success"));
     }

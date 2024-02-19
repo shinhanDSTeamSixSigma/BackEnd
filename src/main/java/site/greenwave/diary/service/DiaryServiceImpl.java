@@ -1,17 +1,17 @@
 package site.greenwave.diary.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import site.greenwave.crop.CropEntity;
+import site.greenwave.diary.dto.DiaryDto;
 import site.greenwave.diary.entity.DiaryEntity;
 import site.greenwave.diary.repository.DiaryRepository;
 import site.greenwave.member.MemberEntity;
@@ -31,36 +31,24 @@ public class DiaryServiceImpl implements DiaryService {
     //일기 등록
     @Override
     @Transactional
-    public Map<String, Object> registerDiary(Map<String, Object> map) {
-        Integer memberNo = Integer.parseInt(map.get("memberNo").toString());
-        String content = map.get("content").toString();
-        Integer cropNo = Integer.parseInt(map.get("cropNo").toString());
+    public Map<String, Object> registerDiary(DiaryDto diaryDto) {
+    	
+    	// 날짜 파싱
+        Date diaryDate = diaryDto.getDiaryDate();
 
-        String diaryDateString = map.get("diaryDate").toString();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date diaryDate;
-        try {
-            diaryDate = dateFormat.parse(diaryDateString);
-        } catch (ParseException e) {
-            // 날짜 파싱 예외 처리
-            Map<String, Object> result = new HashMap<>();
-            result.put("result", "error");
-            result.put("message", "Failed to parse the date.");
-            return result;
-        }
-
-        DiaryEntity diaryEntity = new DiaryEntity();
+        // MemberEntity 및 CropEntity 생성
         MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setMemberNo(diaryDto.getMemberNo());
+
         CropEntity cropEntity = new CropEntity();
+        cropEntity.setCropNo(diaryDto.getCropNo());
 
-        memberEntity.setMemberNo(memberNo);
+        // DiaryEntity 생성
+        DiaryEntity diaryEntity = new DiaryEntity();
         diaryEntity.setMemberEntity(memberEntity);
-
-        diaryEntity.setDiaryDate(diaryDate);
-        diaryEntity.setContent(content);
-
-        cropEntity.setCropNo(cropNo);
         diaryEntity.setCropEntity(cropEntity);
+        diaryEntity.setDiaryDate(diaryDate);
+        diaryEntity.setContent(diaryDto.getContent());
 
         diaryRepo.save(diaryEntity);
 
@@ -72,8 +60,25 @@ public class DiaryServiceImpl implements DiaryService {
     
     //일기 수정
     @Override
-    public void modifyDiary(Map<String, Object> map, Integer diaryNo) {
+    @Transactional
+    public void modifyDiary(DiaryDto diaryDto) {
+    	Optional<DiaryEntity> modifyDiary = diaryRepo.findById(diaryDto.getDiaryNo());
     	
+        if (modifyDiary.isPresent()) {
+            DiaryEntity existingDiary = modifyDiary.get();
+            existingDiary.setContent(diaryDto.getContent());
+            
+            try {
+                diaryRepo.save(existingDiary);
+            } catch (Exception e) {
+                // 적절한 에러 핸들링
+                e.printStackTrace(); // 또는 로깅 등
+                throw new RuntimeException("일기 수정 중 오류가 발생했습니다.");
+            }
+        } else {
+            // 일기가 존재하지 않을 경우의 처리
+            throw new RuntimeException("해당 일기를 찾을 수 없습니다.");
+        }
     }
 
     //일기 삭제
