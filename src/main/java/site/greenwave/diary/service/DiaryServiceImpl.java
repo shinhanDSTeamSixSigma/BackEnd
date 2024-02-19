@@ -27,6 +27,11 @@ public class DiaryServiceImpl implements DiaryService {
     public List<DiaryEntity> getDiaryInfo(Integer memberNo, Integer cropNo) {
         return diaryRepo.findByMemberEntityMemberNoAndCropEntityCropNo(memberNo, cropNo);
     }
+    
+    //날짜 조건있는 일기 정보
+    public List<DiaryEntity> getDiaryInfoByDate(Integer memberNo, Integer cropNo, Date diaryDate) {
+    	return diaryRepo.findByMemberEntityMemberNoAndCropEntityCropNoAndDiaryDate(memberNo, cropNo, diaryDate);
+    }
 
     //일기 등록
     @Override
@@ -47,6 +52,7 @@ public class DiaryServiceImpl implements DiaryService {
         DiaryEntity diaryEntity = new DiaryEntity();
         diaryEntity.setMemberEntity(memberEntity);
         diaryEntity.setCropEntity(cropEntity);
+        
         diaryEntity.setDiaryDate(diaryDate);
         diaryEntity.setContent(diaryDto.getContent());
 

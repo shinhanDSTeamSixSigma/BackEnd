@@ -1,8 +1,10 @@
 package site.greenwave.point.repository;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
@@ -35,8 +37,10 @@ public interface PointRepository extends JpaRepository<PointEntity, Long>, Query
 		           "AND MONTH(pe.pointDate) = :month")
 	Integer getMonthlyChargePoints(Integer memberNo, Integer year, Integer month);
 	
+	
 	//멤버 넘버, 증감 구분, 작물번호, 날짜에 따른 전체 리스트
 	List<Object[]> findPointsByMemberNoAndChangeValueAndPointDate(Integer memberNo, Integer changeValue, Integer year, Integer month);
+	
 	
 	//작물 영수증: 해당 작물에 소비한 총 금액
 	@Query("SELECT SUM(pe.pointValue) FROM PointEntity pe " +

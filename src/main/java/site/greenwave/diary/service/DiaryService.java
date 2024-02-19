@@ -1,5 +1,6 @@
 package site.greenwave.diary.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,4 +16,7 @@ public interface DiaryService {
     void modifyDiary(DiaryDto diaryDto);
     //삭제
     void deleteDiary(Integer diaryNo);
+    
+    //날짜 조건 목록
+    List<DiaryEntity> getDiaryInfoByDate(Integer memberNo, Integer cropNo, Date diaryDate);
 }

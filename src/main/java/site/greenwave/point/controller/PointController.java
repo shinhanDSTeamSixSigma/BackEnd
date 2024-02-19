@@ -1,15 +1,20 @@
 package site.greenwave.point.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import site.greenwave.point.dto.PointDto;
 import site.greenwave.point.repository.PointRepository;
+import site.greenwave.point.service.PointService;
 
 @CrossOrigin(origins = {"http://localhost:3000/","http://localhost/"})
 @RestController
@@ -18,7 +23,10 @@ public class PointController {
 	
 	@Autowired
 	private PointRepository pointRepo;
-
+    @Autowired
+    private PointService pointService;
+	
+	/* 포인트 내역 */
 	//현재 보유 포인트
 	@GetMapping("/current-point")
 	public Integer getCurrentPoint(
@@ -60,4 +68,11 @@ public class PointController {
                 memberNo, changeValue, year, month);
 	    return entity;
 	}
+	
+	/* 포인트 사용 */
+    @PostMapping("/register-point")
+    public Map<String, Object> registerPoint(@RequestBody PointDto pointDto) {
+        return pointService.registerPoint(pointDto);
+    }
+	
 }

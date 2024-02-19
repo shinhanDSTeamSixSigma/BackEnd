@@ -1,6 +1,4 @@
-package site.greenwave.diary.dto;
-
-import java.util.Date;
+package site.greenwave.point.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,11 +13,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "memberNo")
-public class DiaryDto {
-	private Integer diaryNo;
-	private Date diaryDate;
-	private String content;
+public class BillDto {
+	private Integer finalValue;
+	private Integer originValue;
+	private Integer discountValue;
+	private Integer billDiv;
 	
 	private Integer memberNo;
-	private Integer cropNo;
+	private Integer pointNo;
 }

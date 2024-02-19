@@ -26,7 +26,7 @@ import site.greenwave.member.MemberEntity;
 public class BillEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long billNo;
+	private Integer billNo;
 	private Integer finalValue;
 	private Integer originValue;
 	private Integer discountValue;
