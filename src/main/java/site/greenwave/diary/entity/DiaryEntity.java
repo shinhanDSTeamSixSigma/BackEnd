@@ -1,8 +1,10 @@
 package site.greenwave.diary.entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,8 +30,8 @@ public class DiaryEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer diaryNo;
-	@CreationTimestamp
-	private Timestamp diaryDate;
+	@CreatedDate
+	private Date diaryDate;
 	private String content;
 	@CreationTimestamp
 	private Timestamp registerDate;
