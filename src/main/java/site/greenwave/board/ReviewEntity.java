@@ -16,7 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import site.greenwave.farm.FarmEntity;
-import site.greenwave.member.MemberEntity;
+import site.greenwave.member.entity.MemberEntity;
 
 @Getter
 @Setter
