@@ -1,6 +1,7 @@
 package site.greenwave.farm;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,7 +17,7 @@ import site.greenwave.member.MemberEntity;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "memberEntity")
+@ToString
 @Table(name = "tb_farm")
 @EqualsAndHashCode(of = "farmNo")
 public class FarmEntity {
@@ -34,7 +35,7 @@ public class FarmEntity {
     private Integer farmOrderNum;
     private String farmConnect;
 
-    @OneToOne
+    @OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "member_no")
     private MemberEntity memberEntity;
 

@@ -1,8 +1,4 @@
-package site.greenwave.board;
-
-import java.sql.Timestamp;
-
-import org.hibernate.annotations.CreationTimestamp;
+package site.greenwave.board.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,30 +11,23 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import site.greenwave.farm.FarmEntity;
 import site.greenwave.member.MemberEntity;
 
 @Getter
 @Setter
 @ToString
 @Entity
-@Table(name="tb_review")
-@EqualsAndHashCode(of="reviewNo")
-public class ReviewEntity{
+@Table(name="tb_comment")
+@EqualsAndHashCode(of="commentNo")
+public class CommentEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer reviewNo;
-	private String reviewContent;
-	private Integer rating;
-	@CreationTimestamp
-	private Timestamp createdDate;
-	private boolean isDeleted;
+	private Integer commentNo;
+	private String commentContent;
+	private Integer commentCate;
+	private Integer postNo;
 	
 	@ManyToOne
-	@JoinColumn(name = " member_no")
+	@JoinColumn(name = "member_no")
 	private MemberEntity memberEntity;
-	
-	@ManyToOne
-	@JoinColumn(name = "farm_no")
-	private FarmEntity farmEntity;
 }

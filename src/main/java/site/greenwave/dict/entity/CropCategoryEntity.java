@@ -1,4 +1,4 @@
-package site.greenwave.dict;
+package site.greenwave.dict.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import site.greenwave.board.ReviewEntity;
+import site.greenwave.board.entity.ReviewEntity;
 
 @Getter
 @Setter

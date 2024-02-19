@@ -28,7 +28,8 @@ public class MemberEntity {
 /*    @Column
     private String member_role;*/
     
-    @OneToOne(mappedBy = "memberEntity", cascade = CascadeType.ALL)
-    private FarmEntity farmEntity;
+//    @OneToOne
+//    @JoinColumn(name="memberNo")
+//    private FarmEntity farmEntity;
 
 }
