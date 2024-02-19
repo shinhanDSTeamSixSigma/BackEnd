@@ -8,6 +8,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import site.greenwave.farm.dto.FarmDto;
 import site.greenwave.member.MemberEntity;
 
 @Entity
@@ -15,6 +17,7 @@ import site.greenwave.member.MemberEntity;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
 @ToString(exclude = "memberEntity")
 @Table(name = "tb_farm")
 @EqualsAndHashCode(of = "farmNo")

@@ -1,5 +1,6 @@
 package site.greenwave.farm.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,8 @@ import site.greenwave.farm.dto.PageRequestDto;
 import site.greenwave.farm.dto.PageResponseDto;
 import site.greenwave.farm.entity.FarmEntity;
 import site.greenwave.farm.repository.FarmRepositoy;
+import site.greenwave.member.MemberEntity;
+import site.greenwave.member.MemberRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +31,34 @@ public class FarmServiceImpl implements FarmService {
     //자동 주입하려면 final
     private final ModelMapper modelMapper;
     private final FarmRepositoy farmRepositoy;
+    private final MemberRepository memberRepository;
+
 
     // 등록
     @Override
     public Integer register(FarmDto farmDto) {
         log.info("----------");
-        FarmEntity farm = modelMapper.map(farmDto, FarmEntity.class);
-        FarmEntity savedFarm = farmRepositoy.save(farm);
+
+        Optional<MemberEntity> memberEntity = memberRepository.findById(farmDto.getMemberNo());
+
+        FarmEntity farmEntity = FarmEntity.builder()
+                .farmName(farmDto.getFarmName())
+                .farmAddress(farmDto.getFarmAddress())
+                .farmContent(farmDto.getFarmContent())
+                .farmDescription(farmDto.getFarmDescription())
+                .farmPhone(farmDto.getFarmPhone())
+                .farmSize(farmDto.getFarmSize())
+                .farmCareer(farmDto.getFarmCareer())
+                .farmOrderNum(farmDto.getFarmOrderNum())
+                .farmConnect(farmDto.getFarmConnect())
+                .farmCategory(farmDto.getFarmCategory())
+                .farmRating(farmDto.getFarmRating())
+                .reviewCnt(farmDto.getReviewCnt())
+                // MemberEntity가 존재하지 않으면 예외를 던짐
+                .memberEntity(memberEntity.orElseThrow(() -> new RuntimeException("MemberEntity not found")))
+                .build();
+
+        FarmEntity savedFarm = farmRepositoy.save(farmEntity);
         return savedFarm.getFarmNo();
     }
 
@@ -42,7 +66,26 @@ public class FarmServiceImpl implements FarmService {
     @Override
     public FarmDto get(Integer farmNo) {
         Optional<FarmEntity> result = farmRepositoy.findById(farmNo);
-        FarmDto farmDto = modelMapper.map(result.orElseThrow(), FarmDto.class);
+        FarmEntity farmEntity = result.orElseThrow(() -> new EntityNotFoundException("Farm not found"));
+        FarmDto farmDto = FarmDto.builder()
+                .farmNo(farmNo)
+                .farmName(farmEntity.getFarmName())
+                .farmAddress(farmEntity.getFarmAddress())
+                .farmContent(farmEntity.getFarmContent())
+                .farmDescription(farmEntity.getFarmDescription())
+                .farmPhone(farmEntity.getFarmPhone())
+                .farmSize(farmEntity.getFarmSize())
+                .farmCareer(farmEntity.getFarmCareer())
+                .farmOrderNum(farmEntity.getFarmOrderNum())
+                .farmConnect(farmEntity.getFarmConnect())
+                .farmCategory(farmEntity.getFarmCategory())
+                .farmRating(farmEntity.getFarmRating())
+                .reviewCnt(farmEntity.getReviewCnt())
+                .memberNo(farmEntity.getMemberEntity().getMemberNo())
+                .build();
+
+
+//        FarmDto farmDto = modelMapper.map(result.orElseThrow(), FarmDto.class);
         return farmDto;
     }
 
@@ -58,6 +101,7 @@ public class FarmServiceImpl implements FarmService {
     // 수정
     @Override
     public void modify(FarmDto farmDto) {
+        Optional<MemberEntity> memberEntity = memberRepository.findById(farmDto.getMemberNo());
 
         Optional<FarmEntity> result = farmRepositoy.findById(farmDto.getFarmNo());
         FarmEntity farm = result.orElseThrow();
@@ -66,7 +110,7 @@ public class FarmServiceImpl implements FarmService {
                 .farmNo(farm.getFarmNo())
                 .farmName(farmDto.getFarmName())
                 .farmAddress(farmDto.getFarmAddress())
-                .farmConnect(farmDto.getFarmConnect())
+                .farmContent(farmDto.getFarmContent())
                 .farmDescription(farmDto.getFarmDescription())
                 .farmPhone(farmDto.getFarmPhone())
                 .farmSize(farmDto.getFarmSize())
@@ -76,6 +120,7 @@ public class FarmServiceImpl implements FarmService {
                 .farmCategory(farmDto.getFarmCategory())
                 .farmRating(farmDto.getFarmRating())
                 .reviewCnt(farmDto.getReviewCnt())
+                .memberEntity(memberEntity.orElseThrow(() -> new RuntimeException("MemberEntity not found")))
                 .build();
 
         farmRepositoy.save(modifyEntity);

@@ -9,6 +9,7 @@ import site.greenwave.farm.dto.FarmDto;
 import site.greenwave.farm.dto.PageRequestDto;
 import site.greenwave.farm.dto.PageResponseDto;
 import site.greenwave.farm.entity.FarmEntity;
+import site.greenwave.member.MemberEntity;
 
 import java.util.List;
 
@@ -23,25 +24,28 @@ class FarmServiceTest {
 
     // 저장
     @Test
-    public void testRegister() throws Exception{
+    public void testRegister() throws Exception {
 
-        for (int i = 0; i < 10; i++) {
-        FarmDto farmDto = FarmDto.builder()
-                .farmName("토뭉이네")
-                .farmAddress("경기도 수원시 장안구 장안로")
-                .farmContent("맛있는 감자 농장")
-                .farmDescription("누구나 좋아하는 유기농 감자 전문 농장입니다")
-                .farmPhone("010-7777-7777")
-                .farmSize("300평")
-                .farmCareer("10년")
-                .farmOrderNum(200)
-                .farmConnect("9시 ~ 21시")
-                .farmCategory("가지과")
-                .farmRating(5.0)
-                .reviewCnt(100)
-                .memberNo(1)
-                .build();
-        Integer farmNo = farmService.register(farmDto);
+
+
+        for (int i = 10; i <= 23; i++) {
+
+            FarmDto farmDto = FarmDto.builder()
+                    .farmName("토뭉이네" + i)
+                    .farmAddress("경기도 수원시 장안구 장안로" + i)
+                    .farmContent("맛있는 감자 농장 " + i)
+                    .farmDescription("누구나 좋아하는 유기농 감자 전문 농장입니다 " + i)
+                    .farmPhone("010777777" + i)
+                    .farmSize("250")
+                    .farmCareer("15")
+                    .farmOrderNum(20 + i)
+                    .farmConnect("9시 ~ 22시")
+                    .farmCategory("가지과")
+                    .farmRating(5.0)
+                    .reviewCnt(30 + i)
+                    .memberNo(i)
+                    .build();
+            Integer farmNo = farmService.register(farmDto);
             log.info("FarmNo: " + farmNo);
 
         }
@@ -50,15 +54,16 @@ class FarmServiceTest {
 
     // 상세 조회
     @Test
-    public void testGet() throws Exception{
+    public void testGet() throws Exception {
         //given
         Integer farmNo = 2;
         FarmDto farmDto = farmService.get(farmNo);
         log.info(farmDto);
     }
+
     // 전체 조회
     @Test
-    public void testGetAll() throws Exception{
+    public void testGetAll() throws Exception {
         //given
         List<FarmDto> list = farmService.getAll();
         log.info(list);
@@ -67,7 +72,7 @@ class FarmServiceTest {
 
     // 수정
     @Test
-    public void testModify() throws Exception{
+    public void testModify() throws Exception {
 
         farmService.modify(FarmDto.builder()
                 .farmNo(25)
@@ -80,7 +85,7 @@ class FarmServiceTest {
 
     // 삭제
     @Test
-    public void testDelete() throws Exception{
+    public void testDelete() throws Exception {
         //given
         Integer farmNo = 1;
         farmService.delete(farmNo);
@@ -99,7 +104,6 @@ class FarmServiceTest {
 
         PageResponseDto<FarmDto> response = farmService.list(requestDto);
         log.info(response);
-
 
 
     }

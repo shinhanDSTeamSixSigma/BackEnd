@@ -6,6 +6,7 @@ import site.greenwave.farm.entity.FarmEntity;
 import site.greenwave.file.FileEntity;
 import site.greenwave.member.MemberEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 @Data
@@ -29,31 +30,8 @@ public class FarmDto {
     private Double farmRating;
     private Integer reviewCnt;
 
-    // 조인컬럼이기 때문에 tb_member_no로 나타내야함
-    @JsonProperty("tb_member_no")
     private Integer memberNo;
+    // 사진 관련 필드 추가
+    private List<FileDto> photos;
 
-//    private FileEntity fileEntity;
-
-
-
-//    public static FarmDto toFarmDto(FarmEntity farmEntity, Optional<MemberEntity> memberEntity){
-//        return new FarmDto(
-//                farmEntity.getFarmNo(),
-//                farmEntity.getFarmName(),
-//                farmEntity.getFarmAddress(),
-//                farmEntity.getFarmContent(),
-//                farmEntity.getFarmDescription(),
-//                farmEntity.getFarmPhone(),
-//                farmEntity.getFarmSize(),
-//                farmEntity.getFarmCareer(),
-//                farmEntity.getFarmOrderNum(),
-//                farmEntity.getFarmConnect(),
-//                farmEntity.getFarmCategory(),
-//                farmEntity.getFarmRating(),
-//                farmEntity.getReviewCnt(),
-//                memberEntity.get().getMemberNo()
-////                fileEntity
-//        );
-//    }
 }

@@ -14,8 +14,8 @@ import site.greenwave.farm.controller.formatter.LocalDateFormatter;
 public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("img/**").addResourceLocations("file:///C:/greenwave/img/")//TestLocal Window
-//				.addResourceLocations("file:///C:/greenwave/img/")//TestLocal MacBook
+        registry.addResourceHandler("img/**")
+//              .addResourceLocations("file:///C:/greenwave/img/")//TestLocal Window
                 .addResourceLocations("file:///Users/kky/greenwave/img/")//TestLocal MacBook
 
 //				.addResourceLocations("file:///home/img/")//Deploy
@@ -29,6 +29,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         modelMapper.getConfiguration().setFieldMatchingEnabled(true).setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE).setMatchingStrategy(MatchingStrategies.STRICT);
         return modelMapper;
     }
+
+
 
     // LocalDateFormatter 설정
     @Override

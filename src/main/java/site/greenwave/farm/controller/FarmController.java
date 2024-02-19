@@ -10,6 +10,8 @@ import site.greenwave.farm.dto.FarmDto;
 import site.greenwave.farm.dto.PageRequestDto;
 import site.greenwave.farm.dto.PageResponseDto;
 import site.greenwave.farm.service.FarmService;
+import site.greenwave.member.MemberEntity;
+import site.greenwave.member.MemberRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,7 @@ import java.util.Map;
 public class FarmController {
 
     private final FarmService service;
+    private final MemberRepository memberRepository;
 
     // 농장 상세
     @GetMapping("/{farmNo}")
@@ -38,14 +41,18 @@ public class FarmController {
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
+    // 회원데이터
+    @GetMapping("member-detail")
+    public ResponseEntity<List<MemberEntity>> getMember(){
+        List<MemberEntity> list = memberRepository.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+
+    }
+
     // 농장 페이징
     @GetMapping("/list")
     public ResponseEntity<PageResponseDto<FarmDto>> getPaging(PageRequestDto pageRequestDto) {
         // 코드 안적으면 pageRequestDto는 default 값 들어감
-//        pageRequestDto = PageRequestDto.builder()
-//                .page(3)
-//                .size(10)
-//                .build();
 
         PageResponseDto<FarmDto> list = service.list(pageRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(list);

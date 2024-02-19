@@ -1,14 +1,15 @@
 package site.greenwave.member;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import site.greenwave.farm.entity.FarmEntity;
 
 @Entity
-@Setter
+@Builder
 @Getter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_member")
 @EqualsAndHashCode(of="memberNo")
 public class MemberEntity {
@@ -27,7 +28,7 @@ public class MemberEntity {
     
 /*    @Column
     private String member_role;*/
-    
+
 //    @OneToOne(mappedBy = "memberEntity", cascade = CascadeType.ALL)
 //    private FarmEntity farmEntity;
 

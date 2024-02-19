@@ -1,14 +1,19 @@
 package site.greenwave.file;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
+@RequiredArgsConstructor
+@Component
 public class FileUtil {
 
-	@Autowired
-	private FileRepository repo;
+
+	private final FileRepository repo;
 	/**
 	 * 이미지 하나 이상 가져올 수 있을 때
 	 * @param manage_div 파일 div 구분 
