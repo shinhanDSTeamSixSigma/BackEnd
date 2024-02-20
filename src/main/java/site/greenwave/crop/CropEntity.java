@@ -1,7 +1,6 @@
 package site.greenwave.crop;
 
 import java.sql.Timestamp;
-
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Entity;
