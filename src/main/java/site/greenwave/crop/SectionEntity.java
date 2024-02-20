@@ -1,9 +1,5 @@
 package site.greenwave.crop;
 
-
-import org.hibernate.annotations.ColumnDefault;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +10,7 @@ import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import site.greenwave.farm.FarmEntity;
 @Entity
 @Getter
 @Setter
@@ -22,10 +19,10 @@ import lombok.Setter;
 public class SectionEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int sectionNo;
-	@Column
-	private int sectionSize;
+	private Integer sectionNo;
+	private Integer sectionSize;
+	
 	@ManyToOne
-	@JoinColumn(name="tb_farm_farmNo")
+	@JoinColumn(name="farm_no")
 	private FarmEntity farmEntity;
 }
