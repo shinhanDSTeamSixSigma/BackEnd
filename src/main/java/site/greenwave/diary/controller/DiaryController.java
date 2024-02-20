@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,17 +40,23 @@ public class DiaryController {
 		List<DiaryEntity> list = diaryService.getDiaryInfo(memberNo, cropNo);
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
+	//일기 세부 내용
+	@GetMapping("list/{diaryNo}")
+	public ResponseEntity<List<DiaryEntity>> getdetail(@PathVariable Integer diaryNo) {
+		List<DiaryEntity> list = diaryService.getDetail(diaryNo);
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+	}
 	
 	//일기 등록
-    @PostMapping("/register")
-    public ResponseEntity<Map<String, Object>> register(@RequestBody DiaryDto diaryDto) {
+    @PostMapping("register")
+    public ResponseEntity<Map<String, Object>> getregister(@RequestBody DiaryDto diaryDto) {
 		Map<String, Object> result = diaryService.registerDiary(diaryDto);
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("Result", result.get("diaryNo")));
     }
     
     //일기 수정
-    @PutMapping("/modify/{diaryNo}")
-    public ResponseEntity<Map<String, Object>> modify(
+    @PutMapping("modify/{diaryNo}")
+    public ResponseEntity<Map<String, Object>> getmodify(
     		@RequestBody DiaryDto diaryDto,
     		@PathVariable Integer diaryNo) {
     	
@@ -59,8 +66,8 @@ public class DiaryController {
     }
     
     //일기 삭제
-    @PostMapping("/delete/{diaryNo}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable Integer diaryNo) {
+    @DeleteMapping("delete/{diaryNo}")
+    public ResponseEntity<Map<String, Object>> getdelete(@PathVariable Integer diaryNo) {
         diaryService.deleteDiary(diaryNo);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(Map.of("Result", "Success"));
     }

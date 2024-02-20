@@ -20,7 +20,8 @@ public class SecurityConfig {
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/myAccount","/myBalance","/myLoans","/myCards").authenticated()
                         .anyRequest().permitAll());
+      	//security에서는 post할때 토큰
+        http.csrf().disable();
         return http.build();
-
     }
 }

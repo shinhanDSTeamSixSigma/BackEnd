@@ -10,6 +10,8 @@ import site.greenwave.diary.entity.DiaryEntity;
 public interface DiaryService {
 	//목록
 	List<DiaryEntity> getDiaryInfo(Integer memberNo, Integer cropNo);
+	//세부 내역
+	List<DiaryEntity> getDetail(Integer diaryNo);
     //등록
     Map<String, Object> registerDiary(DiaryDto diaryDto);
     //수정

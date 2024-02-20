@@ -25,7 +25,12 @@ public class DiaryServiceImpl implements DiaryService {
     //일기 리스트
     @Override
     public List<DiaryEntity> getDiaryInfo(Integer memberNo, Integer cropNo) {
-        return diaryRepo.findByMemberEntityMemberNoAndCropEntityCropNo(memberNo, cropNo);
+        return diaryRepo.findByMemberEntityMemberNoAndCropEntityCropNoOrderByDiaryDateDesc(memberNo, cropNo);
+    }
+    //일기 세부 정보
+    @Override
+    public List<DiaryEntity> getDetail(Integer diaryNo) {
+    	return diaryRepo.findByDiaryNo(diaryNo);
     }
     
     //날짜 조건있는 일기 정보
