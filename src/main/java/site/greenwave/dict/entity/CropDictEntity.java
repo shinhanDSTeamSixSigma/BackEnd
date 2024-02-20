@@ -1,4 +1,4 @@
-package site.greenwave.dict;
+package site.greenwave.dict.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +27,7 @@ public class CropDictEntity{
 	private Integer summer;
 	private Integer fall;
 	private Integer winter;
+	private Integer level;
 	private String summary;
 	private Integer term;
 	private String cropContent;

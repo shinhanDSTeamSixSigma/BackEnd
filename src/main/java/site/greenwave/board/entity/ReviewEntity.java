@@ -1,4 +1,4 @@
-package site.greenwave.board;
+package site.greenwave.board.entity;
 
 import java.sql.Timestamp;
 
@@ -16,32 +16,29 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import site.greenwave.farm.FarmEntity;
-import site.greenwave.member.entity.MemberEntity;
+import site.greenwave.member.MemberEntity;
 
 @Getter
 @Setter
-@ToString 
+@ToString
 @Entity
-@Table(name="tb_board")
-@EqualsAndHashCode(of="boardNo")
-public class BoardEntity{
+@Table(name="tb_review")
+@EqualsAndHashCode(of="reviewNo")
+public class ReviewEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int boardNo;
-	private int categoryNo;
-	private String title;
-	private String boardContent;
+	private Integer reviewNo;
+	private String reviewContent;
+	private Integer rating;
 	@CreationTimestamp
 	private Timestamp createdDate;
-	private Integer views;
-	private boolean isReplied;
 	private boolean isDeleted;
 	
 	@ManyToOne
-	@JoinColumn(name = "member_no")
+	@JoinColumn(name = " member_no")
 	private MemberEntity memberEntity;
 	
 	@ManyToOne
-	@JoinColumn(name = " farm_no")
+	@JoinColumn(name = "farm_no")
 	private FarmEntity farmEntity;
 }
