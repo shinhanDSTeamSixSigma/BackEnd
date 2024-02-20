@@ -1,4 +1,4 @@
-package site.greenwave.diary;
+package site.greenwave.board;
 
 import java.sql.Timestamp;
 
@@ -15,30 +15,30 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import site.greenwave.crop.CropEntity;
+import site.greenwave.farm.FarmEntity;
 import site.greenwave.member.entity.MemberEntity;
 
-@Setter
 @Getter
+@Setter
 @ToString
 @Entity
-@Table(name="tb_diary")
-@EqualsAndHashCode(of="diaryNo")
-public class DiaryEntity{
+@Table(name="tb_review")
+@EqualsAndHashCode(of="reviewNo")
+public class ReviewEntity{
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer diaryNo;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer reviewNo;
+	private String reviewContent;
+	private Integer rating;
 	@CreationTimestamp
-	private Timestamp diaryDate;
-	private String content;
-	@CreationTimestamp
-	private Timestamp registerDate;
+	private Timestamp createdDate;
+	private boolean isDeleted;
 	
 	@ManyToOne
-	@JoinColumn(name = "member_no")
+	@JoinColumn(name = " member_no")
 	private MemberEntity memberEntity;
 	
 	@ManyToOne
-	@JoinColumn(name = "crop_no")
-	private CropEntity cropEntity;
+	@JoinColumn(name = "farm_no")
+	private FarmEntity farmEntity;
 }

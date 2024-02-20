@@ -1,4 +1,5 @@
-package site.greenwave.diary;
+package site.greenwave.crop;
+
 
 import java.sql.Timestamp;
 
@@ -14,31 +15,23 @@ import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-import site.greenwave.crop.CropEntity;
-import site.greenwave.member.entity.MemberEntity;
-
-@Setter
-@Getter
-@ToString
 @Entity
-@Table(name="tb_diary")
-@EqualsAndHashCode(of="diaryNo")
-public class DiaryEntity{
+@Getter
+@Setter
+@Table(name="tb_crop_sensor_log")
+@EqualsAndHashCode(of="logNo")
+public class CropSensorLogEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer diaryNo;
-	@CreationTimestamp
-	private Timestamp diaryDate;
-	private String content;
-	@CreationTimestamp
-	private Timestamp registerDate;
+	private Integer logNo;
+	private Integer thomer;
+	private Integer humidity;
+	private Integer lumen;
+	private Integer soilHumid;
 	
+	@CreationTimestamp
+	private Timestamp sensorTime;
 	@ManyToOne
-	@JoinColumn(name = "member_no")
-	private MemberEntity memberEntity;
-	
-	@ManyToOne
-	@JoinColumn(name = "crop_no")
+	@JoinColumn(name="crop_no")
 	private CropEntity cropEntity;
 }

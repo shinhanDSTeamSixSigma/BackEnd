@@ -1,7 +1,5 @@
 package site.greenwave.crop;
 
-
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,10 +19,10 @@ import site.greenwave.farm.FarmEntity;
 public class SectionEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int sectionNo;
-	@Column
-	private int sectionSize;
+	private Integer sectionNo;
+	private Integer sectionSize;
+	
 	@ManyToOne
-	@JoinColumn(name="tb_farm_farmNo")
+	@JoinColumn(name="farm_no")
 	private FarmEntity farmEntity;
 }
