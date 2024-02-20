@@ -7,10 +7,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import site.greenwave.farm.dto.FarmDto;
-import site.greenwave.member.MemberEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import site.greenwave.member.entity.MemberEntity;
 
 @Entity
 @Getter

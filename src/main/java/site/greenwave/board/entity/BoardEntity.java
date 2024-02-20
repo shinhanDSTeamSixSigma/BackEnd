@@ -1,4 +1,4 @@
-package site.greenwave.board;
+package site.greenwave.board.entity;
 
 import java.sql.Timestamp;
 
@@ -11,31 +11,38 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
-import site.greenwave.farm.entity.FarmEntity;
-import site.greenwave.member.MemberEntity;
+import site.greenwave.farm.FarmEntity;
+import site.greenwave.member.entity.MemberEntity;
 
 @Getter
-@Setter
-@ToString
+@Builder
+@ToString 
 @Entity
-@Table(name="tb_review")
-@EqualsAndHashCode(of="reviewNo")
-public class ReviewEntity{
+@Table(name="tb_board")
+@EqualsAndHashCode(of="boardNo")
+@NoArgsConstructor
+@AllArgsConstructor
+public class BoardEntity{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer reviewNo;
-	private String reviewContent;
-	private Integer rating;
+	private int boardNo;
+	private int categoryNo;
+	private String title;
+	private String boardContent;
 	@CreationTimestamp
 	private Timestamp createdDate;
+	private Integer views;
+	private boolean isReplied;
 	private boolean isDeleted;
 	
 	@ManyToOne
-	@JoinColumn(name = " member_no")
+	@JoinColumn(name = "member_no")
 	private MemberEntity memberEntity;
 	
 	@ManyToOne

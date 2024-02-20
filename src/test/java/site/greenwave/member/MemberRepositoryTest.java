@@ -1,10 +1,12 @@
 package site.greenwave.member;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.junit.jupiter.api.Test;
+
+import lombok.extern.log4j.Log4j2;
+import site.greenwave.member.entity.MemberEntity;
+import site.greenwave.member.repository.MemberRepository;
 
 @SpringBootTest
 @Log4j2

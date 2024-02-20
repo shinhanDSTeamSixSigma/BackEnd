@@ -1,7 +1,10 @@
 package site.greenwave.farm;
 
-import lombok.extern.log4j.Log4j2;
-import lombok.extern.slf4j.Slf4j;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,13 +12,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+
+import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import site.greenwave.farm.entity.FarmEntity;
 import site.greenwave.farm.repository.FarmRepositoy;
-import site.greenwave.member.MemberEntity;
-import site.greenwave.member.MemberRepository;
-
-import java.util.List;
-import java.util.Optional;
+import site.greenwave.member.entity.MemberEntity;
+import site.greenwave.member.repository.MemberRepository;
 
 @SpringBootTest
 @Slf4j

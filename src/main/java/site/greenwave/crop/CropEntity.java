@@ -14,8 +14,8 @@ import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import site.greenwave.dict.CropDictEntity;
-import site.greenwave.member.MemberEntity;
+import site.greenwave.dict.entity.CropDictEntity;
+import site.greenwave.member.entity.MemberEntity;
 @Entity
 @Getter
 @Setter

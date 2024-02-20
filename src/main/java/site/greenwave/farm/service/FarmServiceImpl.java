@@ -1,8 +1,9 @@
 package site.greenwave.farm.service;
 
-import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,18 +11,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import site.greenwave.farm.dto.FarmDto;
 import site.greenwave.farm.dto.PageRequestDto;
 import site.greenwave.farm.dto.PageResponseDto;
 import site.greenwave.farm.entity.FarmEntity;
 import site.greenwave.farm.repository.FarmRepositoy;
-import site.greenwave.member.MemberEntity;
-import site.greenwave.member.MemberRepository;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import site.greenwave.member.entity.MemberEntity;
+import site.greenwave.member.repository.MemberRepository;
 
 @Service
 @Transactional

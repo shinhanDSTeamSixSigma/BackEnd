@@ -6,28 +6,25 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import site.greenwave.dict.CropDictEntity;
-import site.greenwave.farm.entity.FarmEntity;
+import site.greenwave.member.entity.MemberEntity;
 
 @Entity
 @Setter
 @Getter
-@Table(name = "tb_farm_crop")
-@EqualsAndHashCode(of = "farmCropNo")
-public class FarmCropEntity {
+@Table(name = "tb_farm_like")
+public class FarmLikeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer farmCropNo;
+    private Integer farmLikeNo;
 
     @ManyToOne
     @JoinColumn(name = "farm_no")
     private FarmEntity farmEntity;
-    @OneToOne
-    @JoinColumn(name = "crop_dict_no")
-    private CropDictEntity cropDictEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "member_no")
+    private MemberEntity memberEntity;
 }
