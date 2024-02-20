@@ -3,7 +3,8 @@ package site.greenwave.crop;
 
 import java.sql.Timestamp;
 
-import jakarta.persistence.Column;
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,18 +23,15 @@ import lombok.Setter;
 public class CropSenseorLogEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int logNo;
-	@Column
-	private int thomer;
-	@Column
-	private int humidity;
-	@Column
-	private int lumen;
-	@Column
-	private int soilHumid;
-	@Column
+	private Integer logNo;
+	private Integer thomer;
+	private Integer humidity;
+	private Integer lumen;
+	private Integer soilHumid;
+	
+	@CreationTimestamp
 	private Timestamp sensorTime;
 	@ManyToOne
-	@JoinColumn(name="tb_crop_cropNo")
+	@JoinColumn(name="crop_no")
 	private CropEntity cropEntity;
 }
