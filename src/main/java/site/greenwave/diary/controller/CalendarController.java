@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,16 +54,44 @@ public class CalendarController {
 	
 	//작물 구매일
 	@GetMapping("/crop/buy-date")
-	 ResponseEntity<Date> getCropBuyDate(
+	ResponseEntity<Date> getCropBuyDate(
 	        @RequestParam("memberNo") Integer memberNo,
 	        @RequestParam("cropNo") Integer cropNo) {
-
+	
 	    Date cropBuyDate = cropRepo.getCropBuyDate(memberNo, cropNo);
-
+	
 	    if (cropBuyDate != null) {
 	        return ResponseEntity.ok(cropBuyDate);
 	    } else {
 	        return ResponseEntity.notFound().build();
 	    }
 	}
+	
+	//작물 구매일 및 이름
+	@GetMapping("/crop/crop-info")
+    ResponseEntity<Object[]> getCropDetails(
+	        @RequestParam("memberNo") Integer memberNo,
+	        @RequestParam("cropNo") Integer cropNo) {
+    	
+        Optional<Object[]> cropDetailsOptional = cropRepo.getCropNameAndDate(cropNo, memberNo);
+
+        if (cropDetailsOptional.isPresent()) {
+            Object[] cropDetails = cropDetailsOptional.get();
+            return ResponseEntity.ok(cropDetails);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    //작물 온습조도
+    @GetMapping("/sensor-info")
+    public ResponseEntity<List<Object[]>> getDiaryAndSensorInfo(
+            @RequestParam Integer memberNo,
+            @RequestParam String diaryDate,
+            @RequestParam Integer cropNo) {
+    	
+	    List<Object[]> list = cropRepo.findDiaryAndSensorInfo(memberNo, diaryDate, cropNo);
+
+		return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
 }
