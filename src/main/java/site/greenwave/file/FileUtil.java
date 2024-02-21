@@ -31,7 +31,6 @@ public class FileUtil {
 
 	Date d = new Date();
 	SimpleDateFormat sdf = new  SimpleDateFormat("yyyyMMddHHmmssSSS");
-	
 	/**
 	 * 이미지 하나 이상 가져올 수 있을 때
 	 * @param manage_div 파일 div 구분 

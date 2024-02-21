@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import site.greenwave.farm.FarmEntity;
+import site.greenwave.farm.entity.FarmEntity;
 @Entity
 @Getter
 @Setter

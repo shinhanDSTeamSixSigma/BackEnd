@@ -2,6 +2,7 @@ package site.greenwave.file;
 
 import java.sql.Timestamp;
 
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import jakarta.persistence.Entity;
@@ -17,8 +18,11 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name="tb_file")
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Table(name="tb_file")
 @EqualsAndHashCode(of="file_no")
 public class FileEntity {
 	@Id
