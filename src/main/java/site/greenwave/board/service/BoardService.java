@@ -7,8 +7,8 @@ import site.greenwave.board.dto.BoardDTO;
 import site.greenwave.board.entity.BoardEntity;
 import site.greenwave.board.repository.BoardRepository;
 import site.greenwave.farm.FarmEntity;
-import site.greenwave.member.MemberEntity;
-import site.greenwave.member.MemberRepository;
+import site.greenwave.member.entity.MemberEntity;
+import site.greenwave.member.repository.MemberRepository;
 
 @Service
 public class BoardService {

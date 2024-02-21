@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.greenwave.crop.CropMapper">
+
+	
+	<select id="getCropsFromMemberNoAndFarmNo" parameterType="map" resultType="map">
+		SELECT	  C.crop_no AS cropNo
+				, C.crop_nickname As cropNickname
+				, C.streaming_addr AS streamingAddr
+				, C.member_no AS memberNo
+				, C.crop_state AS cropState
+				, C.buy_date AS buyDate
+				, C.end_date AS endDate
+				, C.created_date AS createdDate
+				, C.dict_no AS dictNo
+				, C.section_no AS sectionNo
+				, S.farm_no AS farmNo
+				, NVL(I.image,"") AS image
+		FROM tb_crop AS C
+		INNER JOIN tb_section 	AS S
+								ON S.section_no = C.section_no
+								AND S.farm_no = #{farm_no}
+		LEFT JOIN (SELECT 	  F.manage_div
+							, F.file_manage_no
+							, CONCAT("/",F.manage_div,"/",F.file_src,".",F.file_extension) AS image
+				   FROM		tb_file AS F
+				   WHERE  	F.manage_div = "CROP"
+				   ORDER BY upload_date desc
+				   LIMIT 1) AS I
+							ON I.file_manage_no = C.crop_no
+		WHERE C.member_no = #{member_no}
+	</select>
+	
+
+</mapper>

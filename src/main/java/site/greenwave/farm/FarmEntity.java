@@ -9,7 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.*;
-import site.greenwave.member.MemberEntity;
+import site.greenwave.member.entity.MemberEntity;
 
 @Entity
 @Setter
