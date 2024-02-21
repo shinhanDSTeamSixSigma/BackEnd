@@ -1,6 +1,9 @@
 package site.greenwave.board.entity;
 
+import java.sql.Timestamp;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,9 +27,10 @@ public class CommentEntity{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer commentNo;
 	private String commentContent;
+	//
 	private Integer commentCate;
 	private Integer postNo;
-	
+	private Timestamp commentDate; 
 	@ManyToOne
 	@JoinColumn(name = "member_no")
 	private MemberEntity memberEntity;
