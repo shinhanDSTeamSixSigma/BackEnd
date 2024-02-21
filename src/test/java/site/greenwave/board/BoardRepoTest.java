@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import site.greenwave.board.entity.BoardEntity;
 import site.greenwave.board.repository.BoardRepository;
 import site.greenwave.farm.FarmEntity;
-import site.greenwave.member.MemberEntity;
+import site.greenwave.member.entity.MemberEntity;
 
 @SpringBootTest
 @Slf4j
