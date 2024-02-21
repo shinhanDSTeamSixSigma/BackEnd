@@ -24,7 +24,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @Log4j2
-    @RequestMapping("/api/farm")
+@RequestMapping("/api/farm")
 public class FarmFileController {
 
     private final CustomFileUtil customFileUtil;
