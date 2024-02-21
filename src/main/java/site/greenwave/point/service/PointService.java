@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import site.greenwave.crop.CropEntity;
-import site.greenwave.member.MemberEntity;
+import site.greenwave.member.entity.MemberEntity;
 import site.greenwave.point.dto.PointDto;
 import site.greenwave.point.entity.PointEntity;
 import site.greenwave.point.repository.PointRepository;

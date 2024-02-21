@@ -45,7 +45,7 @@ public class PointRepositoryTest {
 		result.ifPresent(pointEntity -> log.info("result: "+String.valueOf(pointEntity.getPointNo())));
 		log.info(String.valueOf("result2: "+result2.getPointNo()));
 		
-		
+		/*
 		//그냥 찾기
 		List<PointEntity> entity = pointRepo.findAll();
 		//member_no에 따른 전체 리스트
@@ -58,7 +58,7 @@ public class PointRepositoryTest {
 		entity.forEach(x -> log.info("entity: "+String.valueOf(x.getPointNo())));
 	    entity2.forEach(x -> log.info("entity2: "+String.valueOf(x.getPointNo())));
 	    entity3.forEach(x -> log.info("entity3: "+String.valueOf(x.getPointNo())));
-	    entity4.forEach(x -> log.info("entity4: "+String.valueOf(x.getPointNo())));
+	    entity4.forEach(x -> log.info("entity4: "+String.valueOf(x.getPointNo())));*/
 	}
 	
 	@Test

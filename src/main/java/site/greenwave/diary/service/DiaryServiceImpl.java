@@ -14,7 +14,7 @@ import site.greenwave.crop.CropEntity;
 import site.greenwave.diary.dto.DiaryDto;
 import site.greenwave.diary.entity.DiaryEntity;
 import site.greenwave.diary.repository.DiaryRepository;
-import site.greenwave.member.MemberEntity;
+import site.greenwave.member.entity.MemberEntity;
 
 @Service
 public class DiaryServiceImpl implements DiaryService {

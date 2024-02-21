@@ -10,7 +10,7 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import site.greenwave.point.entity.PointEntity;
 
-public interface PointRepository extends JpaRepository<PointEntity, Long>, QuerydslPredicateExecutor<PointEntity>{
+public interface PointRepository extends JpaRepository<PointEntity, Integer>, QuerydslPredicateExecutor<PointEntity>{
 	
 	//포인트 내역: 현재 보유 포인트
 	@Query("SELECT " +

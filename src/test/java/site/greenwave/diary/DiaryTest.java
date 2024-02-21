@@ -16,7 +16,7 @@ import site.greenwave.diary.dto.DiaryDto;
 import site.greenwave.diary.entity.DiaryEntity;
 import site.greenwave.diary.repository.DiaryRepository;
 import site.greenwave.diary.service.DiaryService;
-import site.greenwave.member.MemberEntity;
+import site.greenwave.member.entity.MemberEntity;
 
 
 @SpringBootTest
@@ -36,8 +36,8 @@ public class DiaryTest {
 	    Integer memberNo = 1;
 	    Integer cropNo = 1;
 	    
-    	List<DiaryEntity> entity = diaryRepo.findByMemberEntityMemberNoAndCropEntityCropNo(memberNo, cropNo);
-    	entity.forEach(x -> log.info("entity: "+String.valueOf(x)));
+    	/*List<DiaryEntity> entity = diaryRepo.findByMemberEntityMemberNoAndCropEntityCropNo(memberNo, cropNo);
+    	entity.forEach(x -> log.info("entity: "+String.valueOf(x)));*/
     }
     //등록
 	@Test

@@ -9,9 +9,9 @@ import com.querydsl.core.Tuple;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPQLQuery;
 
-import site.greenwave.member.QMemberEntity;
-import site.greenwave.point.QPointEntity;
+import site.greenwave.member.entity.QMemberEntity;
 import site.greenwave.point.entity.PointEntity;
+import site.greenwave.point.entity.QPointEntity;
 
 public class PointRepositoryImpl extends QuerydslRepositorySupport {
 	public PointRepositoryImpl() {

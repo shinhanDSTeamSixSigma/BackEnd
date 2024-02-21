@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import site.greenwave.crop.CropEntity;
-import site.greenwave.member.MemberEntity;
+import site.greenwave.member.entity.MemberEntity;
 import site.greenwave.point.dto.BillDto;
 import site.greenwave.point.dto.PointDto;
 import site.greenwave.point.entity.BillEntity;
