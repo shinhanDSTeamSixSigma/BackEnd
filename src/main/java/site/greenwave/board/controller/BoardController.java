@@ -26,8 +26,8 @@ import site.greenwave.board.entity.CommentEntity;
 import site.greenwave.board.repository.BoardRepository;
 import site.greenwave.board.repository.CommentRepository;
 import site.greenwave.board.service.BoardService;
-import site.greenwave.member.MemberEntity;
-import site.greenwave.member.MemberRepository;
+import site.greenwave.member.entity.MemberEntity;
+import site.greenwave.member.repository.MemberRepository;
 
 @CrossOrigin(origins= {"http://localhost:3000/","http://192.168.0.51:3000/"})
 @RestController

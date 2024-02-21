@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import site.greenwave.board.dto.BoardDTO;
 import site.greenwave.board.entity.BoardEntity;
 import site.greenwave.board.repository.BoardRepository;
-import site.greenwave.farm.FarmEntity;
+import site.greenwave.farm.entity.FarmEntity;
 import site.greenwave.member.entity.MemberEntity;
 import site.greenwave.member.repository.MemberRepository;
 
