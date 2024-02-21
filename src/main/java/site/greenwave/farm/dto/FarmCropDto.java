@@ -13,5 +13,5 @@ import lombok.NoArgsConstructor;
 public class FarmCropDto {
 
     private Integer farmNo;
-    private Integer cropDictNo;
+    private String cropName;
 }
