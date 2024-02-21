@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import site.greenwave.farm.FarmEntity;
+import site.greenwave.farm.entity.FarmEntity;
 import site.greenwave.member.entity.MemberEntity;
 
 @Getter
