@@ -25,6 +25,7 @@ import site.greenwave.farm.FarmEntity;
 import site.greenwave.member.MemberEntity;
 
 @Getter
+@Setter
 @Builder
 @ToString 
 @Entity

@@ -24,7 +24,7 @@ public class BoardDTO {
     private boolean isReplied;
     private boolean isDeleted;
     private int memberNo; 
-    
+
     private String memberId;
     private int farmNo; 
 
