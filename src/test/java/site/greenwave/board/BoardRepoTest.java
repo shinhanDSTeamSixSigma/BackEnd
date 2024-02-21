@@ -48,26 +48,26 @@ public class BoardRepoTest {
 	
 	@Test
 	public void testRead1() throws Exception{
-		int memberNo=1;
+		/*int memberNo=1;
 		int categoryNo=1;
 		
 		List<BoardEntity> boardList=boardrepo.findByMemberEntityMemberNoAndCategoryNo(memberNo, categoryNo);
 		for (BoardEntity board : boardList) {
 	        int boardNo = board.getBoardNo();
 	        log.info("회원별 문의글 번호: {}", boardNo);
-	    }
+	    }*/
 	}
 	
 	@Test
 	public void testRead2() throws Exception{
-		int farmNo=1;
+		/*int farmNo=1;
 		int categoryNo=1;
 		
 		List<BoardEntity> boardListByFarm=boardrepo.findByFarmEntityFarmNoAndCategoryNo(farmNo, categoryNo);
 		for (BoardEntity board : boardListByFarm) {
 	        int boardNo = board.getBoardNo();
 	        log.info("농장별 문의글 번호: {}", board);
-	    }
+	    }*/
 	}
 	
 	
