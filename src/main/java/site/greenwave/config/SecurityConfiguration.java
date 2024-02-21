@@ -34,8 +34,7 @@ public class SecurityConfiguration {
         http
                 .csrf(AbstractHttpConfigurer::disable) //CSRF 보호를 비활성화
                 .authorizeHttpRequests((auth) ->
-                        auth.requestMatchers("/**").permitAll()
-
+                        auth.requestMatchers("/","/login/**","/signup/**").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS)) //세션을 사용하지 않음
@@ -48,7 +47,8 @@ public class SecurityConfiguration {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration config = new CorsConfiguration();
-                config.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+                //config.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+                config.setAllowedOriginPatterns(Collections.singletonList("*"));
                 config.setAllowedMethods(Collections.singletonList("*"));
                 config.setAllowCredentials(true);
                 config.setAllowedHeaders(Collections.singletonList("*"));
