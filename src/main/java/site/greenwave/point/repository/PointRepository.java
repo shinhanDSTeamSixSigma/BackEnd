@@ -58,7 +58,7 @@ public interface PointRepository extends JpaRepository<PointEntity, Integer>, Qu
 	Object[] getLandReceiptInfo(Integer memberNo, Integer cropNo);
 	
 	//작물 영수증: 해당 작물에 소비한 갯수, 금액 - 영양제
-	@Query("SELECT COUNT(pe.pointNo), SUM(pe.pointValue) FROM PointEntity pe " +
+	@Query("SELECT SUM(pe.pointValue)/5000, SUM(pe.pointValue) FROM PointEntity pe " +
 	           "WHERE pe.memberEntity.memberNo = :memberNo " +
 	           "AND pe.cropEntity.cropNo = :cropNo " +
 	           "AND pe.changeValue = 1 " +
