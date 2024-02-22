@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import site.greenwave.crop.CropEntity;
+import site.greenwave.crop.CropRepository;
 import site.greenwave.member.entity.MemberEntity;
 import site.greenwave.point.dto.PointDto;
 import site.greenwave.point.entity.PointEntity;
@@ -18,6 +19,8 @@ public class PointService {
 	
 	@Autowired
     private PointRepository pointRepo;
+	@Autowired
+    private CropRepository cropRepo;
 
     @Transactional
     public Map<String, Object> registerPoint(PointDto pointDto) {
@@ -29,7 +32,7 @@ public class PointService {
         CropEntity cropEntity = new CropEntity();
         cropEntity.setCropNo(pointDto.getCropNo());
 
-        // DiaryEntity 생성
+        // PointEntity 생성
         PointEntity pointEntity = new PointEntity();
         pointEntity.setMemberEntity(memberEntity);
         pointEntity.setCropEntity(cropEntity);
@@ -44,5 +47,10 @@ public class PointService {
         result.put("result", "success");
         result.put("poinNo", pointEntity.getPointNo());
         return result;
+    }
+
+    @Transactional
+    public void registerPointAndCrop(PointEntity pointEntity) {
+        pointRepo.save(pointEntity);
     }
 }
