@@ -24,7 +24,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @Log4j2
-    @RequestMapping("/api/farm")
+@RequestMapping("/api/farm")
 public class FarmFileController {
 
     private final CustomFileUtil customFileUtil;
@@ -62,6 +62,12 @@ public class FarmFileController {
     public ResponseEntity<Resource> viewFileGet(@PathVariable String fileName) {
 
         return customFileUtil.getFile(fileName);
+    }
+
+    @GetMapping("/DICT/{fileName}")
+    public ResponseEntity<Resource> viewFileGetCrop(@PathVariable String fileName) {
+
+        return customFileUtil.getFileCrop(fileName);
     }
 
 
