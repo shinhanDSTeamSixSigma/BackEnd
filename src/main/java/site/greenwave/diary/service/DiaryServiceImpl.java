@@ -1,12 +1,13 @@
 package site.greenwave.diary.service;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -34,7 +35,11 @@ public class DiaryServiceImpl implements DiaryService {
     }
     
     //날짜 조건있는 일기 정보
-    public List<DiaryEntity> getDiaryInfoByDate(Integer memberNo, Integer cropNo, Date diaryDate) {
+    @Query("SELECT d FROM DiaryEntity d " +
+            "WHERE d.memberEntity.memberNo = :memberNo " +
+            "AND d.cropEntity.cropNo = :cropNo " +
+            "AND date_format(d.diaryDate,'%Y-%m-%d') = :diaryDate")
+    public List<DiaryEntity> getDiaryInfoByDate(Integer memberNo, Integer cropNo, String diaryDate){
     	return diaryRepo.findByMemberEntityMemberNoAndCropEntityCropNoAndDiaryDate(memberNo, cropNo, diaryDate);
     }
 
@@ -44,7 +49,7 @@ public class DiaryServiceImpl implements DiaryService {
     public Map<String, Object> registerDiary(DiaryDto diaryDto) {
     	
     	// 날짜 파싱
-        Date diaryDate = diaryDto.getDiaryDate();
+        Timestamp diaryDate = diaryDto.getDiaryDate();
 
         // MemberEntity 및 CropEntity 생성
         MemberEntity memberEntity = new MemberEntity();

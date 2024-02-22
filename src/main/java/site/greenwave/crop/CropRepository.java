@@ -26,12 +26,9 @@ public interface CropRepository extends JpaRepository<CropEntity, Long> {
 	
 	//작물 온습조도
     @Query("SELECT date_format(csl.sensorTime,'%Y-%m-%d'), csl.thomer, csl.lumen, csl.soilHumid FROM CropEntity c " +
-            "JOIN CropSenseorLogEntity csl ON c.cropNo = csl.cropEntity.cropNo " +
+            "JOIN CropSensorLogEntity csl ON c.cropNo = csl.cropEntity.cropNo " +
             "WHERE c.memberEntity.memberNo = :memberNo " +
             "AND date_format(csl.sensorTime,'%Y-%m-%d') = :diaryDate " +
             "AND c.cropNo = :cropNo")
-    
-    List<Object[]> findDiaryAndSensorInfo(@Param("memberNo") Integer memberNo,
-                                          @Param("diaryDate") String diaryDate,
-                                          @Param("cropNo") Integer cropNo);
+    List<Object[]> findDiaryAndSensorInfo(Integer memberNo, String diaryDate, Integer cropNo);
 }

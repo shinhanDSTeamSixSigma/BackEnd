@@ -1,6 +1,6 @@
 package site.greenwave.diary.dto;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString(exclude = "memberNo")
 public class DiaryDto {
 	private Integer diaryNo;
-	private Date diaryDate;
+	private Timestamp diaryDate;
 	private String content;
 	
 	private Integer memberNo;

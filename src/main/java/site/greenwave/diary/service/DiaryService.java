@@ -20,5 +20,5 @@ public interface DiaryService {
     void deleteDiary(Integer diaryNo);
     
     //날짜 조건 목록
-    List<DiaryEntity> getDiaryInfoByDate(Integer memberNo, Integer cropNo, Date diaryDate);
+    List<DiaryEntity> getDiaryInfoByDate(Integer memberNo, Integer cropNo, String diaryDate);
 }
