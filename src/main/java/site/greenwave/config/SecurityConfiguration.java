@@ -36,7 +36,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((auth) ->
                         auth.requestMatchers("/**").permitAll()
 
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS)) //세션을 사용하지 않음
                 .authenticationProvider(authenticationProvider)
@@ -48,7 +48,7 @@ public class SecurityConfiguration {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                 CorsConfiguration config = new CorsConfiguration();
-                config.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+                config.setAllowedOrigins(Collections.singletonList("http://localhost:3001"));
                 config.setAllowedMethods(Collections.singletonList("*"));
                 config.setAllowCredentials(true);
                 config.setAllowedHeaders(Collections.singletonList("*"));
