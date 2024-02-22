@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import site.greenwave.diary.dto.DiaryDto;
-import site.greenwave.diary.entity.DiaryEntity;
 import site.greenwave.diary.repository.DiaryRepository;
 import site.greenwave.diary.service.DiaryService;
 import site.greenwave.file.FileUtil;

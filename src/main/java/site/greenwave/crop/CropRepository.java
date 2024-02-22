@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CropRepository extends JpaRepository<CropEntity, Long> {
+public interface CropRepository extends JpaRepository<CropEntity, Integer> {
 	
 	//작물 상태
 	@Query("SELECT ce.cropState FROM CropEntity ce WHERE ce.memberEntity.memberNo = :memberNo AND ce.cropNo = :cropNo")
