@@ -9,8 +9,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import site.greenwave.farm.entity.FarmEntity;
-import site.greenwave.member.MemberEntity;
+import site.greenwave.member.entity.MemberEntity;
 
 @Entity
 @Setter

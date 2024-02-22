@@ -1,19 +1,15 @@
 package site.greenwave.farm.service;
 
-import lombok.extern.log4j.Log4j2;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.multipart.MultipartFile;
+
+import lombok.extern.log4j.Log4j2;
 import site.greenwave.farm.dto.FarmDto;
 import site.greenwave.farm.dto.PageRequestDto;
 import site.greenwave.farm.dto.PageResponseDto;
-import site.greenwave.farm.entity.FarmEntity;
-import site.greenwave.member.MemberEntity;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Log4j2

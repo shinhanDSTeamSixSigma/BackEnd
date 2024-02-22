@@ -1,26 +1,41 @@
 package site.greenwave.config;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import lombok.RequiredArgsConstructor;
 import site.greenwave.farm.controller.formatter.LocalDateFormatter;
 
 @Configuration
+@RequiredArgsConstructor
 public class WebMvcConfig implements WebMvcConfigurer {
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("img/**")
-//              .addResourceLocations("file:///C:/greenwave/img/")//TestLocal Window
-                .addResourceLocations("file:///Users/kky/greenwave/img/")//TestLocal MacBook
+	@Value("${filesave.location}")
+	private String path;
 
-//				.addResourceLocations("file:///home/img/")//Deploy
-                .setCachePeriod(31556926);
-    }
+
+	private final UserInfoArgumentResolver userInfoArgumentResolver;
+	@Override
+	public void  addResourceHandlers(ResourceHandlerRegistry registry) {
+		String resourceLocationPath = "file:///"+path;
+		registry.addResourceHandler("img/**")
+				.addResourceLocations(resourceLocationPath)
+				.setCachePeriod(31556926);
+	}
+	
+	@Override
+	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+		resolvers.add(userInfoArgumentResolver);
+	}
 
     // ModelMapper 설정
     @Bean
@@ -47,4 +62,5 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //		maxAge - 원하는 시간만큼 request를 cashing함
 
     }
+
 }

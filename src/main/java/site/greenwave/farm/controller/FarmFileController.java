@@ -64,6 +64,12 @@ public class FarmFileController {
         return customFileUtil.getFile(fileName);
     }
 
+    @GetMapping("/DICT/{fileName}")
+    public ResponseEntity<Resource> viewFileGetCrop(@PathVariable String fileName) {
+
+        return customFileUtil.getFileCrop(fileName);
+    }
+
 
     // 사진 여러장 보내기
     @GetMapping("/view/{manage_div}/{file_manage_no}")
