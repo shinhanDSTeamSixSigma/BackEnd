@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,14 +43,41 @@ public class BoardController {
 	
 	@Autowired
 	private MemberRepository memberRepo;
-	@Autowired
 	
+	@Autowired
 	private BoardService boardService;
 	
 	//농장별 문의글 목록
     @GetMapping("/inquiryList")
     public List<BoardDTO> getBoardListByFarmNo(@RequestParam int farmNo, @RequestParam int categoryNo){
         List<BoardEntity> boardList = boardRepo.findByFarmEntityFarmNoAndCategoryNoOrderByCreatedDateDesc(farmNo, categoryNo);
+        return boardList.stream()
+                .map(board -> BoardDTO.builder()
+                        .boardNo(board.getBoardNo())
+                        .categoryNo(board.getCategoryNo())
+                        .title(board.getTitle())
+                        .boardContent(board.getBoardContent())
+                        .createdDate(board.getCreatedDate())
+                        .views(board.getViews())
+                        .isReplied(board.isReplied())
+                        .isDeleted(board.isDeleted())
+                        .memberNo(board.getMemberEntity().getMemberNo())
+                        .memberId(board.getMemberEntity().getMemberId())
+                        .farmNo(board.getFarmEntity().getFarmNo()) 
+                        .build())
+                .collect(Collectors.toList());
+    }
+//    //문의글 페이징
+//    @GetMapping("/list") 
+//    public ResponseEntity<PageResponseDto<BoardDTO>> getPaging(BoardPageRequestDTO pageRequestDto) {
+//        PageResponseDto<BoardDTO> list = boardService.list(pageRequestDto);
+//        return ResponseEntity.status(HttpStatus.OK).body(list);
+//    }
+    
+    //회원별 문의글 목록
+    @GetMapping("/{memberNo}/inquiryList")
+    public List<BoardDTO> getBoardListByMemberNo(@PathVariable int memberNo, @RequestParam int categoryNo){
+        List<BoardEntity> boardList = boardRepo.findByMemberEntityMemberNoAndCategoryNoOrderByCreatedDateDesc(memberNo, categoryNo);
         return boardList.stream()
                 .map(board -> BoardDTO.builder()
                         .boardNo(board.getBoardNo())
@@ -94,7 +122,7 @@ public class BoardController {
                 .build();
     }
     
-    //농장 문의 등록
+    //문의 등록
     @PostMapping("/inquiryRegist")
     public BoardDTO registInquiry(@RequestBody BoardDTO boardDTO) {
     	log.info("[Data]: "+boardDTO.toString());
@@ -102,13 +130,13 @@ public class BoardController {
     }
     
     //문의 수정
-    @PostMapping("/inquiryEdit")
-    public BoardDTO editInquiry(@RequestBody BoardDTO boardDTO) {
+    @PutMapping("/inquiryEdit/{boardNo}")
+    public BoardDTO editInquiry(@RequestBody BoardDTO boardDTO,@PathVariable int boardNo) {
     	log.info("Editing inquiry: {}", boardDTO);
         
         // 문의글을 식별하는 boardNo를 확인하고 해당하는 엔티티를 가져옴
-        BoardEntity boardEntity = boardRepo.findById(boardDTO.getBoardNo())
-                .orElseThrow(() -> new RuntimeException("Board not found with boardNo: " + boardDTO.getBoardNo()));
+        BoardEntity boardEntity = boardRepo.findById(boardNo)
+                .orElseThrow(() -> new RuntimeException("Board not found with boardNo: " + boardNo));
         
         // 엔티티의 필드를 수정
         boardEntity.setTitle(boardDTO.getTitle());
@@ -160,8 +188,8 @@ public class BoardController {
             CommentDTO commentDTO = new CommentDTO();
             // CommentEntity에서 필요한 정보를 가져와 CommentDTO에 설정
             commentDTO.setCommentContent(commentEntity.getCommentContent());
-            // 나머지 필요한 정보 설정
-            
+            commentDTO.setCommentDate(commentEntity.getCommentDate());
+            commentDTO.setMemberId(commentEntity.getMemberEntity().getMemberId());            
             commentDTOList.add(commentDTO);
         }
         return commentDTOList;
@@ -194,8 +222,13 @@ public class BoardController {
         // CommentEntity 저장
         commentEntity = commentRepo.save(commentEntity);
         
+        // 문의글에 답변이 등록되었으므로 isReplied 필드를 1로 설정
+        boardEntity.setReplied(true);
+        boardRepo.save(boardEntity); // 변경 사항 저장
+        
         Map<String, Object> result = new HashMap<>();
         result.put("result", "success");
         return result; 
     }
+    
 }

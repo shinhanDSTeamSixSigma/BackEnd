@@ -44,6 +44,7 @@ public class CropEntity {
 	@JoinColumn(name="member_no")
 	private MemberEntity memberEntity;
 	
+
 	@ManyToOne
 	@JoinColumn(name="dict_no")
 	private CropDictEntity cropDictEntity;
