@@ -21,5 +21,5 @@ public class CommentDTO {
 	private int postNo;
 	private Timestamp commentDate;
 	private int memberNo;
-	
+	private String memberId;
 }

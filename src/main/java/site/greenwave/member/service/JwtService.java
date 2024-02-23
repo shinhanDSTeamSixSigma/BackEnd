@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import site.greenwave.member.entity.MemberEntity;
@@ -24,7 +25,10 @@ import java.util.function.Function;
 public class JwtService {
 
     private final MemberRepository repository;
-    private static final String SECFRET_KEY = "232fClKDHBL22dDCSLDNHF40SLCDKHSDLKGH123SLDKVHC80DSLJKCSL367KGDH";
+
+    @Value("${spring.jwt.secret}")
+    private String SECRET_KEY;
+
 
     public JwtService(MemberRepository repository) {
         this.repository = repository;
@@ -67,7 +71,7 @@ public class JwtService {
                 .setClaims(claims) // 추가 클레임을 지정 ( 현재는 역할, 이름 )
                 .setSubject(userDetails.getUsername()) // sub로 id 값 넣기 _ userdetails 에서 username에 id값을 넣어둠
                 .setIssuedAt(new Date(System.currentTimeMillis())) // 생성 날짜
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24)) // 토큰 만료 시간 : 현재 시간으로부터 24시간 후로 설정
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 240)) // 토큰 만료 시간 : 현재 시간으로부터 24시간 후로 설정
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact(); //모든 설정이 완료된 JWT 토큰을 생성하여 문자열 형태로 반환
     }
@@ -105,8 +109,11 @@ public class JwtService {
     //Keys.hmacShaKeyFor(keyBytes)를 사용하여 HMAC-SHA 알고리즘을 사용하는 시크릿 키를 생성
 
     private Key getSignInKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECFRET_KEY);
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
+
+
 
 }
