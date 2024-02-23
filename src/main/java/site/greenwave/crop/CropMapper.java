@@ -14,4 +14,7 @@ public interface CropMapper {
 	 * @return Crop List를 리턴한다. 
 	 */
 	public List<Map> getCropsFromMemberNoAndFarmNo(Map mp);
+
+	public List<Map> getCropsWhatIHave(int memberNo);
+	public List<Map> getDoneCropsWhatIHave(int memberNo);
 }
