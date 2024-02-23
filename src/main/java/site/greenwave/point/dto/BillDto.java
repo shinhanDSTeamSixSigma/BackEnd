@@ -14,12 +14,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(exclude = "memberNo")
 public class BillDto {
-	private Integer billNo;
+	private String merchantUid;
 	private Integer finalValue;
 	private Integer originValue;
 	private Integer discountValue;
 	private Integer billDiv;
 	
 	private Integer memberNo;
-	private Integer pointNo;
 }
