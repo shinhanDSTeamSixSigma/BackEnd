@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import site.greenwave.dict.CropDictEntity;
+import site.greenwave.dict.entity.CropDictEntity;
 import site.greenwave.member.entity.MemberEntity;
 @Entity
 @Getter
@@ -35,15 +35,15 @@ public class CropEntity {
 	@CreationTimestamp
 	private Timestamp createdDate;
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name="section_no")
-	private SectionEntity sectionEntity;
+	private SectionEntity sectionEntity;*/
 	
 	@ManyToOne
 	@JoinColumn(name="member_no")
 	private MemberEntity memberEntity;
 	
-	@ManyToOne
+/*	@ManyToOne
 	@JoinColumn(name="dict_no")
-	private CropDictEntity cropDictEntity;
+	private CropDictEntity cropDictEntity;*/
 }

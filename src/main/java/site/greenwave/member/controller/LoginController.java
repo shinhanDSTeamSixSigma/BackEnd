@@ -1,6 +1,5 @@
 package site.greenwave.member.controller;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +17,6 @@ import site.greenwave.member.entity.MemberEntity;
 import site.greenwave.member.repository.MemberRepository;
 import site.greenwave.member.service.LoginService;
 
-import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -84,7 +82,6 @@ public class LoginController {
 
         return  ResponseEntity.ok().header(HttpHeaders.SET_COOKIE,auth.toString()).body(authenticationResponse);
 
-
     }
 
 
@@ -95,15 +92,20 @@ public class LoginController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<UserInfoDto> getUserInfo(@UserInfo UserInfoDto userInfo) {
+    public ResponseEntity<MemberEntity> getUserInfo(@UserInfo UserInfoDto userInfo) {
         // 사용자 정보를 userInfoDto에서 가져와서 반환
         log.info("userInfo {}", userInfo);
 
         Optional<MemberEntity> member = repository.findByMemberNo(userInfo.getId());
 
-        log.info("member{} " , member);
+        if(member.isPresent()){
+            member.stream().forEach(x -> log.info(x.toString()));
+            return new ResponseEntity<>(member.get(), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
-        return new ResponseEntity<>(userInfo, HttpStatus.OK);
+//        return new ResponseEntity<>(member, HttpStatus.OK);
     }
 
     @GetMapping("/t")

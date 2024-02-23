@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @Builder
 @NoArgsConstructor
+@ToString
 @AllArgsConstructor
 @Table(name = "tb_member")
 @EqualsAndHashCode(of = "memberNo")

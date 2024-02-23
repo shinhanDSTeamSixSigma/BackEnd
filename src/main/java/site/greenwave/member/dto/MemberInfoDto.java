@@ -7,6 +7,7 @@ import site.greenwave.member.entity.Role;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ToString
 public class MemberInfoDto {
     private Integer memberNo;

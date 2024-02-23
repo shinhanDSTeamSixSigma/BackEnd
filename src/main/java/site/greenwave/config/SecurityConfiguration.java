@@ -35,7 +35,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable) //CSRF 보호를 비활성화
                 .authorizeHttpRequests((auth) ->
                         auth.requestMatchers("/","/login/**","/signup/**").permitAll()
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS)) //세션을 사용하지 않음
                 .authenticationProvider(authenticationProvider)

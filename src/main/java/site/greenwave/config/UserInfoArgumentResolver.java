@@ -55,7 +55,6 @@ public class UserInfoArgumentResolver implements HandlerMethodArgumentResolver {
             Claims userInfoFromToken = getUserInfoFromToken(authToken);
             log.info("userInfoFromToken :{}", userInfoFromToken);
 
-
             userInfoDto.setRole((String) userInfoFromToken.get("role"));
             userInfoDto.setName((String) userInfoFromToken.get("name"));
             userInfoDto.setId(Integer.valueOf((String) userInfoFromToken.get("sub")));
