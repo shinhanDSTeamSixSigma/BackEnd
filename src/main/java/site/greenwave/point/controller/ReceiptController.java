@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import site.greenwave.point.repository.PointRepository;
 @CrossOrigin(origins = {"http://localhost:3000/","http://localhost/"})
 @RestController
 @RequestMapping("/receipt")
+@Log4j2
 public class ReceiptController {
 	
 	@Autowired

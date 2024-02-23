@@ -1,4 +1,4 @@
-package site.greenwave.point.dto;
+package site.greenwave.crop;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,13 +13,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "memberNo")
-public class BillDto {
-	private Integer billNo;
-	private Integer finalValue;
-	private Integer originValue;
-	private Integer discountValue;
-	private Integer billDiv;
+public class CropDto {
+	private String cropNickname;
+	private Integer cropState;
 	
+	private Integer farmNo;
 	private Integer memberNo;
-	private Integer pointNo;
+	private Integer dictNo;
 }

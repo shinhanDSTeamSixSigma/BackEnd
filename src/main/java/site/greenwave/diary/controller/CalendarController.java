@@ -34,22 +34,11 @@ public class CalendarController {
 			@RequestParam("memberNo") Integer memberNo,
 			@RequestParam("cropNo") Integer cropNo,
 			@RequestParam("diaryDate") String diaryDate){
-		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-	    try {
-	        // String을 Date로 변환
-	        Date parsedDate = dateFormat.parse(diaryDate);
+	    // 변환된 Date를 사용하여 로직 수행
+		List<DiaryEntity> list = diaryService.getDiaryInfoByDate(memberNo, cropNo, diaryDate);
 
-	        // 변환된 Date를 사용하여 로직 수행
-	        List<DiaryEntity> list = diaryService.getDiaryInfoByDate(memberNo, cropNo, parsedDate);
-
-	        return ResponseEntity.status(HttpStatus.OK).body(list);
-	    } catch (ParseException e) {
-	        // 날짜 형식이 올바르지 않을 경우 처리
-	        e.printStackTrace(); // 또는 로깅 등의 작업 수행
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-	    }
+		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 	
 	//작물 구매일
@@ -91,7 +80,6 @@ public class CalendarController {
             @RequestParam Integer cropNo) {
     	
 	    List<Object[]> list = cropRepo.findDiaryAndSensorInfo(memberNo, diaryDate, cropNo);
-
 		return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 }
