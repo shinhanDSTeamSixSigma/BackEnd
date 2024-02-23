@@ -2,16 +2,18 @@ package site.greenwave.member.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import site.greenwave.member.dto.AuthenticationRequest;
 import site.greenwave.member.dto.AuthenticationResponse;
+import site.greenwave.member.dto.MemberInfoDto;
 import site.greenwave.member.dto.RegisterRequest;
 import site.greenwave.member.entity.MemberEntity;
 import site.greenwave.member.entity.Role;
 import site.greenwave.member.repository.MemberRepository;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -69,4 +71,13 @@ public class LoginService {
             throw new RuntimeException("비밀번호가 잘못되었습니다.");
         }
     }
+
+    public MemberInfoDto findMemberByMemberNo(Integer memberNo) {
+        Optional<MemberEntity> memberEntity = repository.findByMemberNo(memberNo);
+
+        MemberInfoDto memberInfoDto = new MemberInfoDto();
+
+        return memberInfoDto;
+    }
+
 }
