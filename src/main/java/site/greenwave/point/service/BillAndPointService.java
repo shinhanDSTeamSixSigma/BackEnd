@@ -4,13 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import site.greenwave.crop.CropEntity;
+import site.greenwave.crop.CropRepository;
 import site.greenwave.point.entity.BillEntity;
 import site.greenwave.point.entity.PointEntity;
 import site.greenwave.point.repository.BillRepository;
 import site.greenwave.point.repository.PointRepository;
 
 @Service
-public class BillPointService {
+public class BillAndPointService {
     @Autowired
     private BillRepository billRepo;
     @Autowired

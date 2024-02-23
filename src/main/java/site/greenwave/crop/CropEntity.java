@@ -15,6 +15,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import site.greenwave.dict.entity.CropDictEntity;
+import site.greenwave.farm.entity.FarmEntity;
 import site.greenwave.member.entity.MemberEntity;
 @Entity
 @Getter
@@ -36,14 +37,14 @@ public class CropEntity {
 	private Timestamp createdDate;
 	
 	@ManyToOne
-	@JoinColumn(name="section_no")
-	private SectionEntity sectionEntity;
+	@JoinColumn(name="farm_no")
+	private FarmEntity farmEntity;
 	
 	@ManyToOne
 	@JoinColumn(name="member_no")
 	private MemberEntity memberEntity;
 	
 	@ManyToOne
-	@JoinColumn(name="dict_no")
+	@JoinColumn(name="crop_dict_no")
 	private CropDictEntity cropDictEntity;
 }

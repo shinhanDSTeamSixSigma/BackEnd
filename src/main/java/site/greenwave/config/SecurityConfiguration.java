@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((auth) ->
                         auth.requestMatchers("/**").permitAll()
 
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS)) //세션을 사용하지 않음
                 .authenticationProvider(authenticationProvider)

@@ -39,24 +39,31 @@ public class CustomFileUtil {
 
     @Value("${filesave.location}")
     private String basePath;
-    private String uploadPath;
+    private String farmUploadPath;
+    private String cropUploadPath;
 
     @Autowired
     private FileRepository fileRepository;
 
     @PostConstruct
     public void init(){
-        uploadPath = Paths.get(basePath, "FARM").toString();
-        File tempFolder = new File(uploadPath);
+        farmUploadPath = Paths.get(basePath, "FARM").toString();
+        cropUploadPath = Paths.get(basePath, "DICT").toString();
+        log.info(farmUploadPath);
+        log.info(cropUploadPath);
+        File farmTempFolder = new File(farmUploadPath);
+        File cropTempFolder = new File(cropUploadPath);
 
-        if(!tempFolder.exists()){
-            tempFolder.mkdir();
+        if(!farmTempFolder.exists()){
+            farmTempFolder.mkdir();
+        }
+        if(!cropTempFolder.exists()){
+            cropTempFolder.mkdir();
         }
 
 //        uploadPath = tempFolder.getAbsolutePath();
 //        uploadPath = uploadPath.replace("/Users/kky/BackEnd/", "");
-        log.info("-----------------------------");
-        log.info(uploadPath);
+
     }
     public List<String> saveFiles(List<MultipartFile> files) {
         if (files == null || files.isEmpty()) {
@@ -70,13 +77,13 @@ public class CustomFileUtil {
             String fileNameWithoutExtension = savedName.substring(0, savedName.lastIndexOf('.'));
             log.info("파일이름(확장자 제외): " + fileNameWithoutExtension);
 
-            Path savePath = Paths.get(uploadPath, savedName);
+            Path savePath = Paths.get(farmUploadPath, savedName);
             log.info("파일 경로? : " +savePath);
             try {
                 Files.copy(multipartFile.getInputStream(), savePath);
                 String contentType = multipartFile.getContentType();
                 if (contentType != null && contentType.startsWith("image")) {
-                    Path thumbnailPath = Paths.get(uploadPath, "s_" + savedName);
+                    Path thumbnailPath = Paths.get(farmUploadPath, "s_" + savedName);
                     Thumbnails.of(savePath.toFile())
                             .size(200,200)
                             .toFile(thumbnailPath.toFile());
@@ -92,10 +99,28 @@ public class CustomFileUtil {
     // 농장사진 보여주기
     public ResponseEntity<Resource> getFile(String fileName) {
         String thumbnailFimeName = "s_" + fileName;
-        Resource resource = new FileSystemResource(uploadPath + File.separator + thumbnailFimeName);
+        Resource resource = new FileSystemResource(farmUploadPath + File.separator + thumbnailFimeName);
         log.info("resource: " + resource);
         if(! resource.isReadable() ){
-            resource = new FileSystemResource(uploadPath + File.separator + "default.png");
+            resource = new FileSystemResource(farmUploadPath + File.separator + "default.png");
+        }
+        HttpHeaders headers = new HttpHeaders();
+        try {
+            headers.add("Content-Type", Files.probeContentType(resource.getFile().toPath()));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+        return ResponseEntity.ok().headers(headers).body(resource);
+
+    }
+
+    // 작물사진 보여주기
+    public ResponseEntity<Resource> getFileCrop(String fileName) {
+        String thumbnailFimeName = fileName;
+        Resource resource = new FileSystemResource(cropUploadPath + File.separator + thumbnailFimeName);
+        log.info("resource: " + resource);
+        if(! resource.isReadable() ){
+            resource = new FileSystemResource(cropUploadPath + File.separator + "default.png");
         }
         HttpHeaders headers = new HttpHeaders();
         try {
@@ -114,8 +139,8 @@ public class CustomFileUtil {
         }
         fileNames.forEach(filename -> {
             String thumbnailFimeName = "s_" + filename;
-            Path thumbnailPath = Paths.get(uploadPath, thumbnailFimeName);
-            Path filePath = Paths.get(uploadPath, filename);
+            Path thumbnailPath = Paths.get(farmUploadPath, thumbnailFimeName);
+            Path filePath = Paths.get(farmUploadPath, filename);
 
             try {
                 Files.deleteIfExists(filePath);
@@ -125,5 +150,4 @@ public class CustomFileUtil {
             }
         });
     }
-
 }
