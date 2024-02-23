@@ -52,7 +52,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new LocalDateFormatter());
     }
-
+/*
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedOrigins("*").allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS").maxAge(30).allowedHeaders("Authorization", "Cache-Control", "Content-Type");
@@ -61,6 +61,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 //		allowedMethods - HTTP Method를 지정 (* 로 모든 Method를 허용)
 //		maxAge - 원하는 시간만큼 request를 cashing함
 
-    }
+    }*/
 
 }
