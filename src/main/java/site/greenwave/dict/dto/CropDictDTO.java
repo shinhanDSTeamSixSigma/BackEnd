@@ -1,5 +1,6 @@
 package site.greenwave.dict.dto;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,7 +9,8 @@ import site.greenwave.dict.entity.CropDictEntity;
 
 @Getter
 @Setter
-@ToString 
+@ToString
+
 public class CropDictDTO {
 	private Integer cropDictNo;
 	private String cropName;

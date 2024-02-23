@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import site.greenwave.diary.dto.DiaryDto;
-import site.greenwave.diary.entity.DiaryEntity;
+import site.greenwave.diary.repository.DiaryRepository;
 import site.greenwave.diary.service.DiaryService;
 import site.greenwave.file.FileUtil;
 
@@ -29,21 +29,39 @@ public class DiaryController {
 	@Autowired
     private DiaryService diaryService;
 	@Autowired
+    private DiaryRepository diaryRepo;
+	@Autowired
 	private FileUtil file;
 
+//	//일기 리스트
+//	@GetMapping("/list")
+//	public ResponseEntity<List<DiaryEntity>> getDiaryInfo(
+//			@RequestParam("memberNo") Integer memberNo,
+//			@RequestParam("cropNo") Integer cropNo){
+//		
+//		List<DiaryEntity> list = diaryService.getDiaryInfo(memberNo, cropNo);
+//		return ResponseEntity.status(HttpStatus.OK).body(list);
+//	}
+//	//일기 세부 내용
+//	@GetMapping("list/{diaryNo}")
+//	public ResponseEntity<List<DiaryEntity>> getdetail(@PathVariable Integer diaryNo) {
+//		List<DiaryEntity> list = diaryService.getDetail(diaryNo);
+//        return ResponseEntity.status(HttpStatus.OK).body(list);
+//	}
+	
 	//일기 리스트
 	@GetMapping("/list")
-	public ResponseEntity<List<DiaryEntity>> getDiaryInfo(
+	public ResponseEntity<List<Object[]>> getDiaryInfo(
 			@RequestParam("memberNo") Integer memberNo,
 			@RequestParam("cropNo") Integer cropNo){
 		
-		List<DiaryEntity> list = diaryService.getDiaryInfo(memberNo, cropNo);
+		List<Object[]> list = diaryRepo.getDiaryWithCropSensorLog(memberNo, cropNo);
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 	//일기 세부 내용
 	@GetMapping("list/{diaryNo}")
-	public ResponseEntity<List<DiaryEntity>> getdetail(@PathVariable Integer diaryNo) {
-		List<DiaryEntity> list = diaryService.getDetail(diaryNo);
+	public ResponseEntity<List<Object[]>> getdetail(@PathVariable Integer diaryNo) {
+		List<Object[]> list = diaryRepo.getDiaryAndSensorLog(diaryNo);
         return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 	

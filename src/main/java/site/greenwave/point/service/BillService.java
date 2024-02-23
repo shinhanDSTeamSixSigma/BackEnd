@@ -13,7 +13,7 @@ import site.greenwave.point.entity.PointEntity;
 @Service
 public class BillService {
 	@Autowired
-    private BillPointService billPointService;
+    private BillAndPointService billAndPoint;
 
     public void registerBillAndPoint(BillDto billDto, PointDto pointDto) {
         BillEntity billEntity = new BillEntity();
@@ -42,6 +42,6 @@ public class BillService {
 
 
         // BillEntity와 PointEntity를 함께 저장하는 서비스 메소드 호출
-        billPointService.saveBillWithPoint(billEntity, pointEntity);
+        billAndPoint.saveBillWithPoint(billEntity, pointEntity);
     }
 }

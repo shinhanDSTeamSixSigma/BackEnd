@@ -1,6 +1,4 @@
-package site.greenwave.diary.dto;
-
-import java.sql.Timestamp;
+package site.greenwave.crop;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,11 +13,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "memberNo")
-public class DiaryDto {
-	private Integer diaryNo;
-	private Timestamp diaryDate;
-	private String content;
+public class CropDto {
+	private String cropNickname;
+	private Integer cropState;
 	
+	private Integer farmNo;
 	private Integer memberNo;
-	private Integer cropNo;
+	private Integer dictNo;
 }

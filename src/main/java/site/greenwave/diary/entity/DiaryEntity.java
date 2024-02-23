@@ -6,6 +6,8 @@ import java.util.Date;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,7 +33,7 @@ public class DiaryEntity{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer diaryNo;
 	@CreatedDate
-	private Date diaryDate;
+	private Timestamp diaryDate;
 	private String content;
 	@CreationTimestamp
 	private Timestamp registerDate;
