@@ -28,6 +28,16 @@ public class CalendarController {
 	@Autowired
     private CropRepository cropRepo;
 	
+	//일기 리스트
+	@GetMapping("/total-list")
+	public ResponseEntity<List<DiaryEntity>> getDiaryInfo(
+			@RequestParam("memberNo") Integer memberNo,
+			@RequestParam("cropNo") Integer cropNo){
+		
+		List<DiaryEntity> list = diaryService.getDiaryInfo(memberNo, cropNo);
+		return ResponseEntity.status(HttpStatus.OK).body(list);
+	}
+	
 	//날짜 기준 일기 내역
 	@GetMapping("/list")
 	public ResponseEntity<List<DiaryEntity>> getDiaryInfoByDate(
