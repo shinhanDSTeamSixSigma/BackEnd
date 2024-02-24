@@ -25,5 +25,9 @@ public class CropFarmServiceImpl implements CropFarmService {
 	public List<Map> getDoneCropsWhatIHave(int memberNo) {
 		return cropMapper.getDoneCropsWhatIHave(memberNo);
 	}
+	@Override
+	public Map getCropNameAndDateFromCropNo(int cropNo) {
+		return cropMapper.getCropNameAndDate(cropNo);
+	}
 
 }

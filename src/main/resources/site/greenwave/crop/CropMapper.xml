@@ -31,10 +31,9 @@
 		SELECT	  C.crop_no AS cropNo
 				, C.crop_nickname As cropNickname
 				, C.streaming_addr AS streamingAddr
-				, C.member_no AS memberNo
 				, C.crop_state AS cropState
-				, C.buy_date AS buyDate
-				, NVL(C.end_date,"재배중") AS endDate
+				, DATE_FORMAT(C.buy_date,'%Y.%c.%e') AS buyDate
+				, NVL(DATE_FORMAT(C.end_date,'%Y.%c.%e'),"재배중") AS endDate
 				, C.created_date AS createdDate
 				, C.dict_no AS dictNo
 				, C.farm_no AS farmNo
@@ -60,7 +59,7 @@
 				   WHERE  	F.manage_div = "DICT"
 				   GROUP BY F.file_manage_no,F.manage_div
 				   ORDER BY upload_date desc) AS I2
-							ON I2.file_manage_no = D.dict_no
+							ON I2.file_manage_no = D.crop_dict_no
 		WHERE C.member_no = #{member_no}
 		AND C.crop_state != 4
 		ORDER BY C.crop_state ASC
@@ -69,10 +68,9 @@
 		SELECT	  C.crop_no AS cropNo
 				, C.crop_nickname As cropNickname
 				, C.streaming_addr AS streamingAddr
-				, C.member_no AS memberNo
 				, C.crop_state AS cropState
-				, C.buy_date AS buyDate
-				, NVL(C.end_date,"재배중") AS endDate
+				, DATE_FORMAT(C.buy_date,'%Y.%c.%e') AS buyDate
+				, NVL(DATE_FORMAT(C.end_date,'%Y.%c.%e'),"재배중") AS endDate
 				, C.created_date AS createdDate
 				, C.dict_no AS dictNo
 				, C.farm_no AS farmNo
@@ -98,11 +96,18 @@
 				   WHERE  	F.manage_div = "DICT"
 				   GROUP BY F.file_manage_no,F.manage_div
 				   ORDER BY upload_date desc) AS I2
-							ON I2.file_manage_no = D.dict_no
+							ON I2.file_manage_no = D.crop_dict_no
 		WHERE C.member_no = #{member_no}
 		AND C.crop_state = 4
 		ORDER BY C.crop_state ASC
 	</select>
 	
+	<select id="getCropNameAndDate" parameterType="int" resultType="map">
+		SELECT C.crop_nickname AS cropNickname
+			,  DATEDIFF(NOW(),C.buy_date) AS dueDate
+			,  C.crop_no AS cropNo
+		FROM tb_crop AS C
+		WHERE C.crop_no = #{cropNo}
+	</select>
 
 </mapper>

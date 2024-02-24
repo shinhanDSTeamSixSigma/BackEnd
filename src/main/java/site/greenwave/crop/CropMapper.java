@@ -17,4 +17,6 @@ public interface CropMapper {
 
 	public List<Map> getCropsWhatIHave(int memberNo);
 	public List<Map> getDoneCropsWhatIHave(int memberNo);
+	
+	public Map getCropNameAndDate(int cropNo);
 }
