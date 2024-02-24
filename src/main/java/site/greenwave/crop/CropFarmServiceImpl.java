@@ -17,5 +17,17 @@ public class CropFarmServiceImpl implements CropFarmService {
 		map.put("farm_no", farmNo);
 		return cropMapper.getCropsFromMemberNoAndFarmNo(map);
 	}
+	@Override
+	public List<Map> getCropsWhatIHave(int memberNo) {
+		return cropMapper.getCropsWhatIHave(memberNo);
+	}
+	@Override
+	public List<Map> getDoneCropsWhatIHave(int memberNo) {
+		return cropMapper.getDoneCropsWhatIHave(memberNo);
+	}
+	@Override
+	public Map getCropNameAndDateFromCropNo(int cropNo) {
+		return cropMapper.getCropNameAndDate(cropNo);
+	}
 
 }

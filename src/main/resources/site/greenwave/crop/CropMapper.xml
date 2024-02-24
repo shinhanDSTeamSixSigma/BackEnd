@@ -13,7 +13,6 @@
 				, C.end_date AS endDate
 				, C.created_date AS createdDate
 				, C.dict_no AS dictNo
-				, C.section_no AS sectionNo
 				, C.farm_no AS farmNo
 				, NVL(I.image,"") AS image
 		FROM tb_crop AS C
@@ -28,5 +27,87 @@
 		WHERE C.member_no = #{member_no}
 	</select>
 	
+	<select id="getCropsWhatIHave" parameterType="int" resultType="map">
+		SELECT	  C.crop_no AS cropNo
+				, C.crop_nickname As cropNickname
+				, C.streaming_addr AS streamingAddr
+				, C.crop_state AS cropState
+				, DATE_FORMAT(C.buy_date,'%Y.%c.%e') AS buyDate
+				, NVL(DATE_FORMAT(C.end_date,'%Y.%c.%e'),"재배중") AS endDate
+				, C.created_date AS createdDate
+				, C.dict_no AS dictNo
+				, C.farm_no AS farmNo
+				, F.farm_name AS farmName
+				, NVL(I.image,I2.image) AS image
+				, D.crop_name AS cropName
+				, DATEDIFF(NOW(),C.buy_date) AS dueDate
+		FROM tb_crop AS C
+		LEFT JOIN tb_farm AS F ON F.farm_no = C.farm_no
+		LEFT JOIN tb_crop_dict AS D ON D.crop_dict_no = C.dict_no
+		LEFT JOIN (SELECT 	  F.manage_div
+							, F.file_manage_no
+							, CONCAT("/",F.manage_div,"/",F.file_src,".",F.file_extension) AS image
+				   FROM		tb_file AS F
+				   WHERE  	F.manage_div = "CROP"
+				   GROUP BY F.file_manage_no,F.manage_div
+				   ORDER BY upload_date desc) AS I
+							ON I.file_manage_no = C.crop_no
+		LEFT JOIN (SELECT 	  F.manage_div
+							, F.file_manage_no
+							, CONCAT("/",F.manage_div,"/",F.file_src,".",F.file_extension) AS image
+				   FROM		tb_file AS F
+				   WHERE  	F.manage_div = "DICT"
+				   GROUP BY F.file_manage_no,F.manage_div
+				   ORDER BY upload_date desc) AS I2
+							ON I2.file_manage_no = D.crop_dict_no
+		WHERE C.member_no = #{member_no}
+		AND C.crop_state != 4
+		ORDER BY C.crop_state ASC
+	</select>
+	<select id="getDoneCropsWhatIHave" parameterType="int" resultType="map">
+		SELECT	  C.crop_no AS cropNo
+				, C.crop_nickname As cropNickname
+				, C.streaming_addr AS streamingAddr
+				, C.crop_state AS cropState
+				, DATE_FORMAT(C.buy_date,'%Y.%c.%e') AS buyDate
+				, NVL(DATE_FORMAT(C.end_date,'%Y.%c.%e'),"재배중") AS endDate
+				, C.created_date AS createdDate
+				, C.dict_no AS dictNo
+				, C.farm_no AS farmNo
+				, F.farm_name AS farmName
+				, NVL(I.image,I2.image) AS image
+				, D.crop_name AS cropName
+				, DATEDIFF(NOW(),C.buy_date) AS dueDate
+		FROM tb_crop AS C
+		LEFT JOIN tb_farm AS F ON F.farm_no = C.farm_no
+		LEFT JOIN tb_crop_dict AS D ON D.crop_dict_no = C.dict_no
+		LEFT JOIN (SELECT 	  F.manage_div
+							, F.file_manage_no
+							, CONCAT("/",F.manage_div,"/",F.file_src,".",F.file_extension) AS image
+				   FROM		tb_file AS F
+				   WHERE  	F.manage_div = "CROP"
+				   GROUP BY F.file_manage_no,F.manage_div
+				   ORDER BY upload_date desc) AS I
+							ON I.file_manage_no = C.crop_no
+		LEFT JOIN (SELECT 	  F.manage_div
+							, F.file_manage_no
+							, CONCAT("/",F.manage_div,"/",F.file_src,".",F.file_extension) AS image
+				   FROM		tb_file AS F
+				   WHERE  	F.manage_div = "DICT"
+				   GROUP BY F.file_manage_no,F.manage_div
+				   ORDER BY upload_date desc) AS I2
+							ON I2.file_manage_no = D.crop_dict_no
+		WHERE C.member_no = #{member_no}
+		AND C.crop_state = 4
+		ORDER BY C.crop_state ASC
+	</select>
+	
+	<select id="getCropNameAndDate" parameterType="int" resultType="map">
+		SELECT C.crop_nickname AS cropNickname
+			,  DATEDIFF(NOW(),C.buy_date) AS dueDate
+			,  C.crop_no AS cropNo
+		FROM tb_crop AS C
+		WHERE C.crop_no = #{cropNo}
+	</select>
 
 </mapper>
