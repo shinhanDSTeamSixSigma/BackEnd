@@ -22,7 +22,7 @@ import site.greenwave.point.repository.PointRepository;
 import site.greenwave.point.service.PointService;
 
 @Slf4j
-@CrossOrigin(origins = {"http://localhost:3000/","http://localhost/"})
+@CrossOrigin(origins = {"http://192.168.50.247:3000/","http://localhost/"})
 @RestController
 @RequestMapping("/pay")
 public class PointController {
@@ -80,6 +80,7 @@ public class PointController {
 	/* 포인트 사용 : 영양제, 포인트 적립 */
     @PostMapping("/register-point")
     public Map<String, Object> registerPoint(@RequestBody PointDto pointDto) {
+    	log.info("==========="+pointDto);
         return pointService.registerPoint(pointDto);
     }
 	/* 포인트 사용 : 땅 적립 */

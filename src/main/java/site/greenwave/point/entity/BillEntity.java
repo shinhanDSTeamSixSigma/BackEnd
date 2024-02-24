@@ -27,6 +27,7 @@ public class BillEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer billNo;
+	private String merchantUid;
 	private Integer finalValue;
 	private Integer originValue;
 	private Integer discountValue;
