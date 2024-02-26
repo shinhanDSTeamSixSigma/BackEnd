@@ -109,5 +109,28 @@
 		FROM tb_crop AS C
 		WHERE C.crop_no = #{cropNo}
 	</select>
-
+	
+	<select id="getCropDictWithImage" resultType="map">
+		SELECT D.crop_dict_no AS cropDictNo
+	  , D.crop_name AS cropName
+	  , I.image AS image
+		FROM tb_crop_dict AS D
+		LEFT JOIN (SELECT F.manage_div
+						, F.file_manage_no
+						, CONCAT("/",F.manage_div,"/",F.file_src,".",F.file_extension) AS image
+					FROM tb_file AS F
+					WHERE F.manage_div = 'DICT'
+					) AS I
+					  ON I.file_manage_no = D.crop_dict_no
+	</select>
+	
+	<select id="getCropSensorFromCropNoAndDate" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM tb_crop_sensor_log
+		WHERE DATE(sensor_time) = NOW()
+		AND crop_no = #{crop_no}
+	</select>
+	
+	
+	
 </mapper>

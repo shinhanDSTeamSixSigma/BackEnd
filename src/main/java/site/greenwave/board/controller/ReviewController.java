@@ -58,7 +58,7 @@ public class ReviewController {
                         .rating(review.getRating())
                         .isDeleted(review.isDeleted())
                         .memberNo(review.getMemberEntity().getMemberNo())
-                        .memberId(review.getMemberEntity().getMemberId())
+                        .nickname(review.getMemberEntity().getNickname())
                         .farmNo(review.getFarmEntity().getFarmNo()) 
                         .build())
                 .collect(Collectors.toList());
@@ -101,7 +101,7 @@ public class ReviewController {
                 .createdDate(reviewEntity.getCreatedDate())
                 .isDeleted(reviewEntity.isDeleted())
                 .memberNo(reviewEntity.getMemberEntity().getMemberNo())
-                .memberId(reviewEntity.getMemberEntity().getMemberId())
+                .nickname(reviewEntity.getMemberEntity().getNickname())
                 .farmNo(reviewEntity.getFarmEntity().getFarmNo())
                 .farmId(reviewEntity.getFarmEntity().getMemberEntity().getMemberId())
                 .build();
@@ -130,7 +130,7 @@ public class ReviewController {
                 .createdDate(updatedReviewEntity.getCreatedDate())
                 .isDeleted(updatedReviewEntity.isDeleted())
                 .memberNo(updatedReviewEntity.getMemberEntity().getMemberNo())
-                .memberId(updatedReviewEntity.getMemberEntity().getMemberId())           
+                .nickname(updatedReviewEntity.getMemberEntity().getNickname())           
                 .build();
     }
     
