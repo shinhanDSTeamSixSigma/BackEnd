@@ -6,14 +6,7 @@ import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -89,5 +82,12 @@ public class FarmController {
         log.info("Delete : " + farmNo);
         service.delete(farmNo);
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("Result", "Success"));
+    }
+
+    // 농장 이름으로 검색
+    @GetMapping("/search")
+    public ResponseEntity<List<FarmDto>> searchByName(@RequestParam String searchTerm) {
+        List<FarmDto> list = service.searchByName(searchTerm);
+        return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 }
