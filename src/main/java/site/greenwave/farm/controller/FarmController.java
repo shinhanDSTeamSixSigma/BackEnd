@@ -3,6 +3,7 @@ package site.greenwave.farm.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ import lombok.extern.log4j.Log4j2;
 import site.greenwave.farm.dto.FarmDto;
 import site.greenwave.farm.dto.PageRequestDto;
 import site.greenwave.farm.dto.PageResponseDto;
+import site.greenwave.farm.entity.FarmEntity;
+import site.greenwave.farm.repository.FarmRepositoy;
 import site.greenwave.farm.service.FarmService;
 import site.greenwave.member.entity.MemberEntity;
 import site.greenwave.member.repository.MemberRepository;
@@ -25,6 +28,7 @@ public class FarmController {
 
     private final FarmService service;
     private final MemberRepository memberRepository;
+    private final FarmRepositoy farmRepositoy;
 
     // 농장 상세
     @GetMapping("/{farmNo}")
@@ -49,6 +53,17 @@ public class FarmController {
         return ResponseEntity.status(HttpStatus.OK).body(list);
 
     }
+
+    @GetMapping("/memberData/{farmNo}")
+    public ResponseEntity<MemberEntity> getFarmMemember(@PathVariable Integer farmNo){
+        Optional<FarmEntity> farmEntity = farmRepositoy.findById(farmNo);
+
+        Optional<MemberEntity> memberEntity = memberRepository.findByMemberNo(farmEntity.orElseThrow().getMemberEntity().getMemberNo());
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(memberEntity.orElseThrow());
+    }
+
 
     // 농장 페이징
     @GetMapping("/list")
