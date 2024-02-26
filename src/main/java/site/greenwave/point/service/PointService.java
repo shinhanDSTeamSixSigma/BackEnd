@@ -11,6 +11,7 @@ import site.greenwave.crop.CropEntity;
 import site.greenwave.crop.CropRepository;
 import site.greenwave.member.entity.MemberEntity;
 import site.greenwave.point.dto.PointDto;
+import site.greenwave.point.entity.BillEntity;
 import site.greenwave.point.entity.PointEntity;
 import site.greenwave.point.repository.PointRepository;
 
@@ -29,18 +30,26 @@ public class PointService {
         MemberEntity memberEntity = new MemberEntity();
         memberEntity.setMemberNo(pointDto.getMemberNo());
 
-        CropEntity cropEntity = new CropEntity();
-        cropEntity.setCropNo(pointDto.getCropNo());
-
         // PointEntity 생성
         PointEntity pointEntity = new PointEntity();
         pointEntity.setMemberEntity(memberEntity);
-        pointEntity.setCropEntity(cropEntity);
         
         pointEntity.setPointValue(pointDto.getPointValue());
         pointEntity.setChangeValue(pointDto.getChangeValue());
         pointEntity.setChangeCause(pointDto.getChangeCause());
-
+        
+        if (pointDto.getCropNo() != null) {	
+            CropEntity cropEntity = new CropEntity();
+            cropEntity.setCropNo(pointDto.getCropNo());
+            pointEntity.setCropEntity(cropEntity);
+        }
+        
+        if (pointDto.getBillNo() != null) {	
+            BillEntity billEntity = new BillEntity();
+            billEntity.setBillNo(pointDto.getBillNo());
+            pointEntity.setBillEntity(billEntity);
+        }
+        
         pointRepo.save(pointEntity);
 
         Map<String, Object> result = new HashMap<>();

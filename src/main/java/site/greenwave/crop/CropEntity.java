@@ -31,7 +31,6 @@ public class CropEntity {
 	private Integer cropState;
 	@CreationTimestamp
 	private Timestamp buyDate;
-	@CreationTimestamp
 	private Timestamp endDate;
 	@CreationTimestamp
 	private Timestamp createdDate;
