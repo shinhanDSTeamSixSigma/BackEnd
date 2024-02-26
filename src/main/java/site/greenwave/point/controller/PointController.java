@@ -22,7 +22,7 @@ import site.greenwave.point.repository.PointRepository;
 import site.greenwave.point.service.PointService;
 
 @Slf4j
-@CrossOrigin(origins = {"http://192.168.50.247:3000/","http://localhost/"})
+@CrossOrigin(origins = {"http://localhost:3000/","http://localhost/"})
 @RestController
 @RequestMapping("/pay")
 public class PointController {

@@ -13,12 +13,13 @@ import site.greenwave.point.entity.PointEntity;
 public interface PointRepository extends JpaRepository<PointEntity, Integer>, QuerydslPredicateExecutor<PointEntity>{
 	
 	//포인트 내역: 현재 보유 포인트
-	@Query("SELECT " +
-	           "(SELECT SUM(pe.pointValue) FROM PointEntity pe " +
-	           " WHERE pe.memberEntity.memberNo = :memberNo AND pe.changeValue = 0) " +
+	@Query("SELECT COALESCE((" +
+	           "SELECT SUM(pe.pointValue) FROM PointEntity pe " +
+	           "WHERE pe.memberEntity.memberNo = :memberNo AND pe.changeValue = 0), 0) " +
 	           "- " +
-	           "(SELECT SUM(pe.pointValue) FROM PointEntity pe " +
-	           " WHERE pe.memberEntity.memberNo = :memberNo AND pe.changeValue = 1)")
+	           "COALESCE((" +
+	           "SELECT SUM(pe.pointValue) FROM PointEntity pe " +
+	           "WHERE pe.memberEntity.memberNo = :memberNo AND pe.changeValue = 1), 0)")
 	Integer getCurrentPoint(Integer memberNo);
 	
 	//포인트 내역: 총 충전 포인트
