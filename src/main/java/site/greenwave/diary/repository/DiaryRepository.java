@@ -31,6 +31,18 @@ public interface DiaryRepository extends JpaRepository<DiaryEntity, Integer>{
 	           "ORDER BY de.diaryDate DESC")
 	List<Object[]> getDiaryWithCropSensorLog(Integer memberNo, Integer cropNo);
 	
+	//일기 목록 조건(온습도, 사진 포함)
+	@Query("SELECT de, csl, ce.buyDate, fe FROM DiaryEntity de " +
+	           "LEFT JOIN CropSensorLogEntity csl ON de.cropEntity.cropNo = csl.cropEntity.cropNo " +
+	           "LEFT JOIN CropEntity ce ON de.cropEntity.cropNo = ce.cropNo " +
+	           "LEFT JOIN FileEntity fe ON fe.fileManageNo = de.diaryNo " +
+	           "WHERE de.memberEntity.memberNo = :memberNo " +
+	           "AND de.cropEntity.cropNo = :cropNo " +
+	           "AND date_format(de.diaryDate,'%Y-%m-%d') = date_format(csl.sensorTime,'%Y-%m-%d') " +
+	           "AND fe.manageDiv = 'DIARY' " +
+	           "ORDER BY de.diaryDate DESC")
+	List<Object[]> getDiaryWithCropSensorLogAndFile(Integer memberNo, Integer cropNo);
+	
 	//일기 세부 목록 조건(온습도 포함)
 	@Query("SELECT de, csl, ce.buyDate FROM DiaryEntity de " +
 		       "JOIN CropSensorLogEntity csl ON de.cropEntity.cropNo = csl.cropEntity.cropNo " +

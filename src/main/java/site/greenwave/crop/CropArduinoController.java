@@ -22,7 +22,11 @@ import site.greenwave.file.FileUtil;
 @RequestMapping("/fromArduino")
 public class CropArduinoController {
 	@Autowired
-	ArduinoCropSensorRepository cropSensorRepo;
+	ArduinoCropSensorRepository cropSensorHourlyRepo;
+	@Autowired
+	CropSensorLogDetailRepository cropSensorDetailRepo;
+	@Autowired
+	CropFarmService service;
 	
 	@Autowired
 	FileUtil fileUtil;
@@ -39,6 +43,7 @@ public class CropArduinoController {
 		cropEntity.setCropNo(Integer.parseInt((String)map.get("crop_no")));
 		CropSensorLogEntity sensorLogEntity = new CropSensorLogEntity();
 		sensorLogEntity.setCropEntity(cropEntity);
+		CropSensorLogDetailEntity detailEntity = new CropSensorLogDetailEntity();
 		try {
 			sensorLogEntity.setThomer(Integer.parseInt((String)map.get("thomer")));
 		}
@@ -63,8 +68,17 @@ public class CropArduinoController {
 		catch(Exception e) {
 			sensorLogEntity.setSoilHumid(-255);
 		}
+		detailEntity.setCropEntity(cropEntity);
+		detailEntity.setHumidity(sensorLogEntity.getHumidity());
+		detailEntity.setLumen(sensorLogEntity.getLumen());
+		detailEntity.setThomer(sensorLogEntity.getThomer());
+		detailEntity.setSoilHumid(sensorLogEntity.getSoilHumid());
 		log.info(sensorLogEntity.toString());
-		cropSensorRepo.save(sensorLogEntity);
+		cropSensorDetailRepo.save(detailEntity);
+		int countOfHourlyTable = service.getCropSensorFromCropNoAndDate(cropEntity.getCropNo());
+		if(countOfHourlyTable == 0) {
+			cropSensorHourlyRepo.save(sensorLogEntity);
+		}
 	}
 	@PostMapping(consumes = {"multipart/form-data"}, value = "/image/{crop_no}")
 	public void ImageFile(@PathVariable String crop_no ,@RequestBody MultipartFile image, HttpServletRequest req) {
