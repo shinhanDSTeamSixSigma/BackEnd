@@ -43,13 +43,10 @@ public class CropDictController {
 		return objs;
 	}
 
-
-
 	@GetMapping("/listAll")
 	public List<CropDictEntity> listAll(){
 		return cropDictRepo.findAll();
 	}
-
 
 	@GetMapping("/detail/{cropDictNo}")
 	public CropDictDTO getCropDetail(@PathVariable Integer cropDictNo) {

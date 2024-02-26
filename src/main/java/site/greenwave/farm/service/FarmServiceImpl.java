@@ -156,6 +156,12 @@ public class FarmServiceImpl implements FarmService {
 
         return responseDto;
     }
-
+    // 농장 이름으로 검색
+    @Override
+    public List<FarmDto> searchByName(String name) {
+        List<FarmEntity> result = farmRepositoy.findByFarmNameContainingIgnoreCase(name);
+        List<FarmDto> dtoList = result.stream().map(x -> modelMapper.map(x, FarmDto.class)).collect(Collectors.toList());
+        return dtoList;
+    }
 
 }

@@ -23,7 +23,7 @@ public class BoardDTO {
     private boolean isReplied;
     private boolean isDeleted;
     private int memberNo; 
-
+    private String nickname;
     private String memberId;
     private int farmNo; 
 

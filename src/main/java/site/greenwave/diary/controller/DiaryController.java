@@ -46,7 +46,7 @@ public class DiaryController {
 			@RequestParam("memberNo") Integer memberNo,
 			@RequestParam("cropNo") Integer cropNo){
 		
-		List<Object[]> list = diaryRepo.getDiaryWithCropSensorLog(memberNo, cropNo);
+		List<Object[]> list = diaryRepo.getDiaryWithCropSensorLogAndFile(memberNo, cropNo);
 		return ResponseEntity.status(HttpStatus.OK).body(list);
 	}
 	//일기 세부 내용
