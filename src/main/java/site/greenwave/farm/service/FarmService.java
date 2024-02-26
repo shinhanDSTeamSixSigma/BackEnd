@@ -23,4 +23,7 @@ public interface FarmService {
 
     // 페이징
     PageResponseDto<FarmDto> list(PageRequestDto pageRequestDto);
+
+    // 농장 검색
+    List<FarmDto> searchByName(String name);
 }
