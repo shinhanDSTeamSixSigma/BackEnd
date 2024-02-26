@@ -33,15 +33,6 @@ public class DiaryController {
 	@Autowired
 	private FileUtil file;
 
-//	//일기 리스트
-//	@GetMapping("/list")
-//	public ResponseEntity<List<DiaryEntity>> getDiaryInfo(
-//			@RequestParam("memberNo") Integer memberNo,
-//			@RequestParam("cropNo") Integer cropNo){
-//		
-//		List<DiaryEntity> list = diaryService.getDiaryInfo(memberNo, cropNo);
-//		return ResponseEntity.status(HttpStatus.OK).body(list);
-//	}
 //	//일기 세부 내용
 //	@GetMapping("list/{diaryNo}")
 //	public ResponseEntity<List<DiaryEntity>> getdetail(@PathVariable Integer diaryNo) {
