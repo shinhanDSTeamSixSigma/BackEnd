@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
+import site.greenwave.config.UserInfo;
+import site.greenwave.config.UserInfoDto;
 import site.greenwave.file.FileUtil;
 
 @RestController
@@ -23,13 +25,14 @@ public class CropFarmController {
 	CropRepository cropRepo;
 	
 	@GetMapping("/myCropsList")
-	public Map MyCrops(/*@UserInfo UserInfoDto dto*/) {
+	public Map MyCrops(@UserInfo UserInfoDto dto) {
 		/*if(dto == null) {
 			return null;
 		}*/
+		log.info(""+dto.getId()+"    "+dto.getName());
 		Map<String,Object> data = new HashMap<String, Object>();
-		data.put("liveCrops", service.getCropsWhatIHave(1));
-		data.put("doneCrops", service.getDoneCropsWhatIHave(1));
+		data.put("liveCrops", service.getCropsWhatIHave(dto.getId()));
+		data.put("doneCrops", service.getDoneCropsWhatIHave(dto.getId()));
 		return data;
 	}
 	@GetMapping("/mypage/album/{crop_no}")
@@ -45,5 +48,10 @@ public class CropFarmController {
 		data.put("cropData", service.getCropNameAndDateFromCropNo(cropNo));
 		data.put("images", fileutil.getFilesFrom("CROP", cropNo));
 		return data;
+	}
+	
+	@GetMapping("/main/cropDictList")
+	public List<Map> mainCropDictList() {
+		return service.getCropDictWithImage();
 	}
 }
