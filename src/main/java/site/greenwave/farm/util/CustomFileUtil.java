@@ -42,6 +42,7 @@ public class CustomFileUtil {
     private String farmUploadPath;
     private String cropUploadPath;
     private String reviewUploadPath;
+    private String diaryUploadPath;
 
     @Autowired
     private FileRepository fileRepository;
@@ -50,16 +51,23 @@ public class CustomFileUtil {
     public void init(){
         farmUploadPath = Paths.get(basePath, "FARM").toString();
         cropUploadPath = Paths.get(basePath, "DICT").toString();
+
         
         //리뷰용 경로
-        reviewUploadPath = Paths.get(basePath, "POSt").toString();
+        reviewUploadPath = Paths.get(basePath, "POST").toString();
+        diaryUploadPath = Paths.get(basePath, "DIARY").toString();
+
         log.info(reviewUploadPath);
-        
         log.info(farmUploadPath);
         log.info(cropUploadPath);
+        log.info(diaryUploadPath);
+      
         File farmTempFolder = new File(farmUploadPath);
         File cropTempFolder = new File(cropUploadPath);
+
         File reviewTempFolder = new File(reviewUploadPath);
+        File diaryTempFolder = new File(diaryUploadPath);
+
 
         if(!farmTempFolder.exists()){
             farmTempFolder.mkdir();
@@ -67,12 +75,14 @@ public class CustomFileUtil {
         if(!cropTempFolder.exists()){
             cropTempFolder.mkdir();
         }
+        if(!diaryTempFolder.exists()){
+        	diaryTempFolder.mkdir();
+        }
 
         if(!reviewTempFolder.exists()) {
         	reviewTempFolder.mkdir();
         }
-//        uploadPath = tempFolder.getAbsolutePath();
-//        uploadPath = uploadPath.replace("/Users/kky/BackEnd/", "");
+
 
     }
     public List<String> saveFiles(List<MultipartFile> files) {
@@ -105,6 +115,8 @@ public class CustomFileUtil {
             }
         }return uploadNames;
     }
+  
+
     //리뷰사진저장용
     public List<String> saveReviewFiles(List<MultipartFile> files) {
         if (files == null || files.isEmpty()) {
@@ -136,6 +148,7 @@ public class CustomFileUtil {
             }
         }return uploadNames;
     }
+
     
 
     // 농장사진 보여주기
@@ -171,7 +184,6 @@ public class CustomFileUtil {
             return ResponseEntity.internalServerError().build();
         }
         return ResponseEntity.ok().headers(headers).body(resource);
-
     }
 
     //리뷰사진 보여주기
@@ -192,6 +204,7 @@ public class CustomFileUtil {
 
     }
 
+
     public void deleteFiles(List<String> fileNames) {
         if (fileNames == null || fileNames.size() == 0) {
             return;
@@ -208,5 +221,55 @@ public class CustomFileUtil {
                 throw new RuntimeException(e.getMessage());
             }
         });
+    }
+    
+    //일기 저장
+    public List<String> saveFilesDiary(List<MultipartFile> files) {
+        if (files == null || files.isEmpty()) {
+            return new ArrayList<>();
+        }
+        List<String> uploadNames = new ArrayList<>();
+        for (MultipartFile multipartFile : files) {
+            String savedName = multipartFile.getOriginalFilename();
+            log.info("파일이름: " + savedName);
+            // 확장자를 제외한 파일 이름만 추출
+            String fileNameWithoutExtension = savedName.substring(0, savedName.lastIndexOf('.'));
+            log.info("파일이름(확장자 제외): " + fileNameWithoutExtension);
+
+            Path savePath = Paths.get(diaryUploadPath, savedName);
+            log.info("파일 경로? : " +savePath);
+            try {
+                Files.copy(multipartFile.getInputStream(), savePath);
+                String contentType = multipartFile.getContentType();
+                if (contentType != null && contentType.startsWith("image")) {
+                    Path thumbnailPath = Paths.get(diaryUploadPath, "s_" + savedName);
+                    Thumbnails.of(savePath.toFile())
+                            .size(200,200)
+                            .toFile(thumbnailPath.toFile());
+                }
+                uploadNames.add(fileNameWithoutExtension);
+                log.info("업로드 이름: " + uploadNames);
+            } catch (IOException e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        }return uploadNames;
+    }
+    
+    // 일기사진 보여주기
+    public ResponseEntity<Resource> getFileDiary(String fileName) {
+        String thumbnailFimeName = fileName;
+        Resource resource = new FileSystemResource(diaryUploadPath + File.separator + thumbnailFimeName);
+        log.info("resource: " + resource);
+        if(! resource.isReadable() ){
+            resource = new FileSystemResource(diaryUploadPath + File.separator + "default.png");
+        }
+        HttpHeaders headers = new HttpHeaders();
+        try {
+            headers.add("Content-Type", Files.probeContentType(resource.getFile().toPath()));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+        return ResponseEntity.ok().headers(headers).body(resource);
+
     }
 }

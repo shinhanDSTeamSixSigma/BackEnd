@@ -64,7 +64,7 @@ public class DiaryTest {
 	        memberEntity.setMemberNo(memberNo);
 	        diaryEntity.setMemberEntity(memberEntity);
 	
-	        diaryEntity.setDiaryDate(diaryDate);
+//	        diaryEntity.setDiaryDate(diaryDate);
 	        diaryEntity.setContent("안녕안녕");
 	
 	        cropEntity.setCropNo(cropNo);
