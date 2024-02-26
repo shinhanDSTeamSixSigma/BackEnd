@@ -9,4 +9,5 @@ public interface CropFarmService {
 	List<Map> getCropsWhatIHave(int memberNo);
 	List<Map> getDoneCropsWhatIHave(int memberNo);
 	Map getCropNameAndDateFromCropNo(int cropNo);
+	List<Map> getCropDictWithImage();
 }
