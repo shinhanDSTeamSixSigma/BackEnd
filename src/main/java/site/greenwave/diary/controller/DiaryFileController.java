@@ -60,11 +60,11 @@ public class DiaryFileController {
         return ResponseEntity.status(HttpStatus.OK).body(Map.of("result: ", "success"));
     }
     
-    // 일기사진 보여주기
-    @GetMapping("/view/DIARY/{fileName}")
-    public ResponseEntity<Resource> viewFileGet(@PathVariable String fileName) {
 
-        return customFileUtil.getFileDiary(fileName);
+    //일기 사진
+    @GetMapping("/img/DIARY")
+    public String getDiaryDetailImage(@RequestParam Integer diaryNo) {
+        return fileUtil.getFileFrom("DIARY", diaryNo);
     }
     
     // 삭제
