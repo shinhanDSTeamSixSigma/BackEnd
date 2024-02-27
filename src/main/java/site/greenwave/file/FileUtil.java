@@ -147,8 +147,80 @@ public class FileUtil {
 				.fileSrc(changedFileName)
 				.fileExtension(fileExt)
 				.build();
+		log.info(fileEntity.toString());
 		repo.save(fileEntity);
 	}
+	
+	/**
+	 * 크롭 파일 업로드
+	 * @param manage_no
+	 * @param file 실제 파일
+	 */
+	@Transactional
+	public void uploadCropImage(int manage_no, MultipartFile file) {
+		String manage_div = "CROP";
+		if(file == null || file.isEmpty())
+			return;
+		//File saveFile = new File();
+		//토마토.png
+		String fileName = file.getOriginalFilename();
+		//System.out.println("==========================[original file name] "+fileName);
+		//토마토.png -> png
+		String fileExt = StringUtils.getFilenameExtension(fileName);
+		//System.out.println("==========================[data file extension] "+fileExt);
+		//토마토.png -> 토마토
+		fileName = fileName.substring(0,fileName.lastIndexOf("."));
+		//ㅌㅗㅁㅏㅌㅗ -> 토마토 Mac 에서 저장하는거 대비용
+		fileName = Normalizer.normalize(fileName, Normalizer.Form.NFC);
+		//System.out.println("==========================[data file name] "+fileName);
+		/*try {
+			//오늘 베이스로 base64 돌림
+			//randVal =  Base64.encodeBase64URLSafeString(sdf.format(d).getBytes("utf-8"));
+			
+		} catch (UnsupportedEncodingException e) {
+			//인코딩 예외시 그냥 날짜 기준으로
+			log.error(e.getMessage());
+			randVal = sdf.format(d);
+		}*///중복을 피하기 위한 랜덤 생성 이름
+		UUID uuid = UUID.randomUUID();
+		String changedFileName = uuid.toString();
+		String realfilename = changedFileName +"." + fileExt;
+		//실제 파일 저장
+		File rFile = null;
+		String fPath = path+manage_div;
+		rFile = new File(fPath,realfilename);
+		try {
+			file.transferTo(rFile);
+			
+
+			//이미지 시 썸네일 저장
+			
+		} catch (IllegalStateException e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+		} catch (IOException e) {
+			log.error(e.getMessage());
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		//DB 저장
+		FileEntity fileEntity = FileEntity.builder().manageDiv(manage_div)
+				.fileManageNo(Integer.valueOf(manage_no))
+				.fileName(fileName)
+				.fileSrc(changedFileName)
+				.fileExtension(fileExt)
+				.build();
+		log.info(fileEntity.toString());
+		repo.save(fileEntity);
+	}
+	
+	
+	
+	
 	/**
 	 * 파일 삭제. 걍 DB에서파일 삭제 할 것
 	 * @param manage_div

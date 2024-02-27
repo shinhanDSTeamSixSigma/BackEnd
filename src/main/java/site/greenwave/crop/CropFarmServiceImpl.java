@@ -37,5 +37,9 @@ public class CropFarmServiceImpl implements CropFarmService {
 	public int getCropSensorFromCropNoAndDate(int cropNo) {
 		return cropMapper.getCropSensorFromCropNoAndDate(cropNo);
 	}
+	@Override
+	public Map getCropSensorAndCropDataFromCropNo(int crop_no) {
+		return cropMapper.getCropSensorAndCropDataFromCropNo(crop_no);
+	}
 
 }
