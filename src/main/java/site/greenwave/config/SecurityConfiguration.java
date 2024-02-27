@@ -52,6 +52,7 @@ public class SecurityConfiguration {
             	List<String> originList = new ArrayList<>();
             	originList.add("http://localhost:3000");
             	originList.add("http://localhost:5500");
+            	originList.add("http://58.122.202.23");
             	originList.add("http://192.168.0.200"); // 아두이노
                 CorsConfiguration config = new CorsConfiguration();
                 config.setAllowedOrigins(originList);
