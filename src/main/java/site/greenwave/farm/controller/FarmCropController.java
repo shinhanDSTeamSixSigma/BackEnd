@@ -50,14 +50,14 @@ public class FarmCropController {
 
     @GetMapping("/{farmNo}/farmCropGet")
     public ResponseEntity<Map<String,CropDictDTO>> getFarmCrop(@PathVariable(name = "farmNo") Integer farmNo){
-
+    	
         // farmCropEntity에서 farmNo로 값 구하기
         FarmCropEntity farmCropEntity = farmCropRepository.findByFarmEntityFarmNo(farmNo);
 
         // getFarmCropNo값 구할 수 있다
         Integer cropNum = farmCropEntity.getCropDictEntity().getCropDictNo();
         Optional<CropDictEntity> cropDictEntity = cropDictRepository.findById(cropNum);
-        CropDictEntity cropDict = cropDictEntity.orElseThrow(() -> new RuntimeException("MemberEntity not found"));
+        CropDictEntity cropDict = cropDictEntity.orElse(null);
 
         CropDictDTO dto = new CropDictDTO(cropDict);
         dto.setImage(fileUtil.getFileFrom("DICT", dto.getCropDictNo()));
