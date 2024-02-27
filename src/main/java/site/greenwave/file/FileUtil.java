@@ -184,11 +184,11 @@ public class FileUtil {
 		}*///중복을 피하기 위한 랜덤 생성 이름
 		UUID uuid = UUID.randomUUID();
 		String changedFileName = uuid.toString();
-		changedFileName = changedFileName +"." + fileExt;
+		String realfilename = changedFileName +"." + fileExt;
 		//실제 파일 저장
 		File rFile = null;
 		String fPath = path+manage_div;
-		rFile = new File(fPath,changedFileName);
+		rFile = new File(fPath,realfilename);
 		try {
 			file.transferTo(rFile);
 			
