@@ -54,4 +54,16 @@ public class CropFarmController {
 	public List<Map> mainCropDictList() {
 		return service.getCropDictWithImage();
 	}
+	
+	@GetMapping("/mypage/streaming/{crop_no}")
+	public Map mainCropSensorStreamingPage(@PathVariable String crop_no) {
+		int cropNo=1;
+		try {
+			cropNo = Integer.parseInt(crop_no);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return service.getCropSensorAndCropDataFromCropNo(cropNo);
+		
+	}
 }

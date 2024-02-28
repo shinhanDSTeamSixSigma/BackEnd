@@ -12,4 +12,5 @@ public interface CropFarmService {
 	Map getCropNameAndDateFromCropNo(int cropNo);
 	List<Map> getCropDictWithImage();
 	int getCropSensorFromCropNoAndDate(int cropNo);
+	Map getCropSensorAndCropDataFromCropNo(int crop_no);
 }

@@ -23,4 +23,6 @@ public interface CropMapper {
 	public List<Map> getCropDictWithImage();
 	
 	public int getCropSensorFromCropNoAndDate(int crop_no);
+	
+	public Map getCropSensorAndCropDataFromCropNo(int crop_no);
 }

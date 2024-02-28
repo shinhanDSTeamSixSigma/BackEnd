@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -81,13 +82,13 @@ public class CropArduinoController {
 		}
 	}
 	@PostMapping(consumes = {"multipart/form-data"}, value = "/image/{crop_no}")
-	public void ImageFile(@PathVariable String crop_no ,@RequestBody MultipartFile image, HttpServletRequest req) {
+	public void ImageFile(@PathVariable String crop_no ,@RequestParam("imageFile") MultipartFile image, HttpServletRequest req) {
 		//log.info(map.toString());
 		//log.info(request.toString());
 		Enumeration<String> headers = req.getHeaderNames();
 		while (headers.hasMoreElements()) {
 			String header =headers.nextElement(); 
-			System.out.println(req.getHeader(header));
+			System.out.println(header+": "+req.getHeader(header));
 		}
 		
 		Enumeration<String> enums = req.getParameterNames();
@@ -96,7 +97,7 @@ public class CropArduinoController {
 			System.out.print("name:"+name);
 //			System.out.println(" "+req.`);
 		}
-		fileUtil.UploadFile("CROP", Integer.parseInt(crop_no), image);
+		fileUtil.uploadCropImage(Integer.parseInt(crop_no), image);
 	}
 	
 }
