@@ -50,7 +50,7 @@ public class SecurityConfiguration {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
             	List<String> originList = new ArrayList<>();
-            	originList.add("http://localhost:3001");
+            	originList.add("http://localhost:3000");
             	originList.add("http://localhost:5500");
             	originList.add("http://192.168.0.200"); // 아두이노
                 CorsConfiguration config = new CorsConfiguration();
