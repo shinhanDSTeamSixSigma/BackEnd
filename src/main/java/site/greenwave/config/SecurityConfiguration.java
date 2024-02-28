@@ -50,7 +50,7 @@ public class SecurityConfiguration {
             @Override
             public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
             	List<String> originList = new ArrayList<>();
-            	originList.add("http://localhost:3001");
+            	originList.add("http://localhost:3000");
             	originList.add("http://localhost:5500");
             	originList.add("http://58.122.202.23");	//교육장
             	originList.add("http://43.201.105.68"); //Front AWS
