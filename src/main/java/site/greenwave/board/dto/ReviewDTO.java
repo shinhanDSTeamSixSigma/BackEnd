@@ -24,7 +24,7 @@ public class ReviewDTO {
     private String nickname;
     private String memberId;
     private int farmNo; 
-    private String farmId;
+    private String farmName;
     private String imagePath;
     private List<String> imagePaths;
 }

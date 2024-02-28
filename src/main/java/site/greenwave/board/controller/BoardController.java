@@ -63,6 +63,7 @@ public class BoardController {
                         .isDeleted(board.isDeleted())
                         .memberNo(board.getMemberEntity().getMemberNo())
                         .memberId(board.getMemberEntity().getMemberId())
+                        .nickname(board.getMemberEntity().getNickname())
                         .farmNo(board.getFarmEntity().getFarmNo()) 
                         .build())
                 .collect(Collectors.toList());
@@ -90,6 +91,7 @@ public class BoardController {
                         .isDeleted(board.isDeleted())
                         .memberNo(board.getMemberEntity().getMemberNo())
                         .memberId(board.getMemberEntity().getMemberId())
+                        .nickname(board.getMemberEntity().getNickname())
                         .farmNo(board.getFarmEntity().getFarmNo()) 
                         .build())
                 .collect(Collectors.toList());
@@ -118,6 +120,7 @@ public class BoardController {
                 .isDeleted(boardEntity.isDeleted())
                 .memberNo(boardEntity.getMemberEntity().getMemberNo())
                 .memberId(boardEntity.getMemberEntity().getMemberId())
+                .nickname(boardEntity.getMemberEntity().getNickname())
                 .farmNo(boardEntity.getFarmEntity().getFarmNo())
                 .build();
     }
@@ -156,6 +159,7 @@ public class BoardController {
                 .isReplied(updatedBoardEntity.isReplied())
                 .isDeleted(updatedBoardEntity.isDeleted())
                 .memberNo(updatedBoardEntity.getMemberEntity().getMemberNo())
+                .nickname(updatedBoardEntity.getMemberEntity().getNickname())
                 .memberId(updatedBoardEntity.getMemberEntity().getMemberId())
                 .farmNo(updatedBoardEntity.getFarmEntity().getFarmNo())
                 .build();
@@ -189,7 +193,7 @@ public class BoardController {
             // CommentEntity에서 필요한 정보를 가져와 CommentDTO에 설정
             commentDTO.setCommentContent(commentEntity.getCommentContent());
             commentDTO.setCommentDate(commentEntity.getCommentDate());
-            commentDTO.setMemberId(commentEntity.getMemberEntity().getMemberId());            
+            commentDTO.setNickname(commentEntity.getMemberEntity().getNickname());            
             commentDTOList.add(commentDTO);
         }
         return commentDTOList;
