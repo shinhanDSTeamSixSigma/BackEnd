@@ -59,7 +59,8 @@ public class ReviewController {
                         .isDeleted(review.isDeleted())
                         .memberNo(review.getMemberEntity().getMemberNo())
                         .nickname(review.getMemberEntity().getNickname())
-                        .farmNo(review.getFarmEntity().getFarmNo()) 
+                        .farmNo(review.getFarmEntity().getFarmNo())
+                        .farmName(review.getFarmEntity().getFarmName())
                         .build())
                 .collect(Collectors.toList());
 	}
@@ -77,8 +78,9 @@ public class ReviewController {
                         .isDeleted(review.isDeleted())
                         .memberNo(review.getMemberEntity().getMemberNo())
                         .memberId(review.getMemberEntity().getMemberId())
+                        .nickname(review.getMemberEntity().getNickname())
                         .farmNo(review.getFarmEntity().getFarmNo())
-                        .farmId(review.getFarmEntity().getMemberEntity().getMemberId())
+                        .farmName(review.getFarmEntity().getFarmName())
                         .build())
                 .collect(Collectors.toList());
 	}
@@ -103,7 +105,7 @@ public class ReviewController {
                 .memberNo(reviewEntity.getMemberEntity().getMemberNo())
                 .nickname(reviewEntity.getMemberEntity().getNickname())
                 .farmNo(reviewEntity.getFarmEntity().getFarmNo())
-                .farmId(reviewEntity.getFarmEntity().getMemberEntity().getMemberId())
+                .farmName(reviewEntity.getFarmEntity().getFarmName())
                 .build();
     }
     //리뷰 수정

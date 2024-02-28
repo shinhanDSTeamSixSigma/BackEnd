@@ -90,7 +90,7 @@ public class FarmCropController {
 
         FarmCropEntity farmCropEntity = farmCropRepository.findByFarmEntityFarmNo(farmNo);
         farmCropEntity = FarmCropEntity.builder()
-                .farmCropNo(farmCropEntity.getFarmCropNo())
+//                .farmCropNo(farmCropEntity.getFarmCropNo())
                 .farmEntity(farmEntity.orElseThrow(() -> new RuntimeException("MemberEntity not found")))
                 .cropDictEntity(cropDictEntity.orElseThrow(() -> new RuntimeException("MemberEntity not found")))
                 .build();
