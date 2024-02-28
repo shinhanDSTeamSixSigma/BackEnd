@@ -49,25 +49,25 @@ public class CropArduinoController {
 			sensorLogEntity.setThomer(Integer.parseInt((String)map.get("thomer")));
 		}
 		catch(Exception e) {
-			sensorLogEntity.setThomer(-255);
+			sensorLogEntity.setThomer(0);
 		}
 		try {
 			sensorLogEntity.setHumidity(Integer.parseInt((String)map.get("humidity")));
 		}
 		catch(Exception e) {
-			sensorLogEntity.setHumidity(-255);
+			sensorLogEntity.setHumidity(0);
 		}
 		try {
 			sensorLogEntity.setLumen(Integer.parseInt((String)map.get("lumen")));
 		}
 		catch(Exception e) {
-			sensorLogEntity.setLumen(-255);
+			sensorLogEntity.setLumen(0);
 		}
 		try {
 			sensorLogEntity.setSoilHumid(Integer.parseInt((String)map.get("solid_humid")));
 		}
 		catch(Exception e) {
-			sensorLogEntity.setSoilHumid(-255);
+			sensorLogEntity.setSoilHumid(0);
 		}
 		detailEntity.setCropEntity(cropEntity);
 		detailEntity.setHumidity(sensorLogEntity.getHumidity());

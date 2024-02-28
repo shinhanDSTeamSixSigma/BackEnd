@@ -127,7 +127,7 @@
 	<select id="getCropSensorFromCropNoAndDate" parameterType="int" resultType="int">
 		SELECT COUNT(*)
 		FROM tb_crop_sensor_log
-		WHERE DATE(sensor_time) = NOW()
+		WHERE DATE(sensor_time) = DATE(NOW())
 		AND crop_no = #{crop_no}
 	</select>
 	
