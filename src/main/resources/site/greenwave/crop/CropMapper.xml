@@ -132,5 +132,26 @@
 	</select>
 	
 	
+	<select id="getCropSensorAndCropDataFromCropNo" parameterType="int" resultType="map">
+		SELECT 	C.crop_nickname AS cropNickname
+			  , C.crop_no AS cropNo
+			  , C.streaming_addr AS streamingAddr
+			  , D.thomer AS thomer
+			  , D.humidity AS humid
+			  , D.lumen AS lumen
+			  , D.soil_humid AS soilHumid
+			  , DATEDIFF(NOW(),C.buy_date) AS petDate
+		FROM tb_crop AS C
+		LEFT JOIN (SELECT LD.*
+						 FROM tb_crop_sensor_log_detail AS LD
+						WHERE LD.crop_no = #{crop_no}
+						ORDER BY LD.sensor_time DESC
+						LIMIT 1)
+						AS D
+						ON D.crop_no = C.crop_no
+		WHERE C.crop_no = #{crop_no}
+		LIMIT 1
+	</select>
+	
 	
 </mapper>
